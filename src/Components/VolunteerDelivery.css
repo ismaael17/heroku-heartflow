@@ -1,0 +1,373 @@
+
+.VolunteerDelivery_VolunteerDelivery {
+	position: relative;
+	left: 0px;
+	top: 0px;
+	margin: auto;
+	width: 100%;
+	height: 1142.5px;
+	overflow: auto;
+	background: rgba(255,255,255,1.00);
+}
+.VolunteerDelivery_VolunteerDelivery .topBanner {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 1434.24px;
+	height: 136.12px;
+	background: rgb(224, 64, 64);
+}
+.VolunteerDelivery_VolunteerDelivery .logo {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 500px;
+	height: 150px;
+	object-fit: cover;
+	overflow: hidden;
+	z-index: 1;
+}
+.VolunteerDelivery_VolunteerDelivery .pnlMain {
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	top: 191.73px;
+	width: 918px;
+	height: 730px;
+	background: rgb(224, 64, 64);
+	border-radius: 49.8px;
+}
+.VolunteerDelivery_VolunteerDelivery .edtSerial {
+	position: absolute;
+	right: 50px;
+	top: 150px;
+	width: 345.28px;
+	height: 55.61px;
+	background: rgba(255,255,255,1.00);
+	border-radius: 16.599999999999998px;
+	border: 1px solid rgba(0,0,0,1);
+	box-sizing: border-box;
+	font-family: Montserrat;
+	font-size: 26.56px;
+	font-weight: 500;
+	line-height: 31.125px;
+}
+.VolunteerDelivery_VolunteerDelivery .edtOutlet {
+	position: absolute;
+	right: 50px;
+	top: 220px;
+	width: 345.28px;
+	height: 55.61px;
+	background: rgba(255,255,255,1.00);
+	border-radius: 16.599999999999998px;
+	border: 1px solid rgba(0,0,0,1);
+	box-sizing: border-box;
+	font-family: Montserrat;
+	font-size: 26.56px;
+	font-weight: 500;
+	line-height: 31.125px;
+}
+.VolunteerDelivery_VolunteerDelivery .edtStart {
+	position: absolute;
+	right: 50px;
+	top: 290px;
+	width: 345.28px;
+	height: 55.61px;
+	background: rgba(255,255,255,1.00);
+	border-radius: 16.599999999999998px;
+	border: 1px solid rgba(0,0,0,1);
+	box-sizing: border-box;
+	font-family: Montserrat;
+	font-size: 26.56px;
+	font-weight: 500;
+	line-height: 31.125px;
+}
+.VolunteerDelivery_VolunteerDelivery .edtEnd {
+	position: absolute;
+	right: 50px;
+	top: 360px;
+	width: 345.28px;
+	height: 55.61px;
+	background: rgba(255,255,255,1.00);
+	border-radius: 16.599999999999998px;
+	border: 1px solid rgba(0,0,0,1);
+	box-sizing: border-box;
+	font-family: Montserrat;
+	font-size: 26.56px;
+	font-weight: 500;
+	line-height: 31.125px;
+}
+.VolunteerDelivery_VolunteerDelivery .RANGEEND {
+	position: absolute;
+	left: 50px;
+	top: 370px;
+	width: 323.7px;
+	height: 39.01px;
+	display: flex;
+	align-items: center;
+	color: rgba(255,255,255,1.00);
+	font-family: Poppins;
+	font-size: 29.88px;
+	font-weight: 400;
+	line-height: 35.015625px;
+}
+.VolunteerDelivery_VolunteerDelivery .COMMENTSABOUTDELIVERY {
+	position: absolute;
+	left: 50px;
+	top: 440px;
+	width: 434.91999999999996px;
+	height: 39.01px;
+	display: flex;
+	align-items: center;
+	color: rgba(255,255,255,1.00);
+	font-family: Poppins;
+	font-size: 29.88px;
+	font-weight: 400;
+	line-height: 35.015625px;
+}
+.VolunteerDelivery_VolunteerDelivery .RANGESTART {
+	position: absolute;
+	left: 50px;
+	top: 300px;
+	width: 323.7px;
+	height: 39.01px;
+	display: flex;
+	align-items: center;
+	color: rgba(255,255,255,1.00);
+	font-family: Poppins;
+	font-size: 29.88px;
+	font-weight: 400;
+	line-height: 35.015625px;
+}
+.VolunteerDelivery_VolunteerDelivery .OUTLET {
+	position: absolute;
+	left: 50px;
+	top: 230px;
+	width: 323.7px;
+	height: 39.01px;
+	display: flex;
+	align-items: center;
+	color: rgba(255,255,255,1.00);
+	font-family: Poppins;
+	font-size: 29.88px;
+	font-weight: 400;
+	line-height: 35.015625px;
+}
+.VolunteerDelivery_VolunteerDelivery .SERIALLETTER {
+	position: absolute;
+	left: 50px;
+	top: 160px;
+	width: 323.7px;
+	height: 39.01px;
+	display: flex;
+	align-items: center;
+	color: rgba(255,255,255,1.00);
+	font-family: Poppins;
+	font-size: 29.88px;
+	font-weight: 400;
+	line-height: 35.015625px;
+}
+.VolunteerDelivery_VolunteerDelivery .edtNrCoupon {
+	position: absolute;
+	right: 50px;
+	top: 80px;
+	width: 345.28px;
+	height: 55.61px;
+	background: rgba(255,255,255,1.00);
+	border-radius: 16.599999999999998px;
+	border: 1px solid rgba(0,0,0,1);
+	box-sizing: border-box;
+	font-family: Montserrat;
+	font-size: 26.56px;
+	font-weight: 500;
+	line-height: 31.125px;
+}
+.VolunteerDelivery_VolunteerDelivery .btnConfirm {
+	position: absolute;
+	right: 50px;
+	top: 655px;
+	width: 200px;
+	height: 55px;
+	background: rgba(0, 0, 83);
+	border-radius: 40px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	color: rgba(256, 256, 256);
+	font-family: Montserrat;
+	font-size: 20px;
+	font-weight: 500;
+	border: 0px;
+}
+
+.VolunteerDelivery_VolunteerDelivery .btnConfirm:hover {
+	background: rgb(0, 225, 255);
+	color: rgb(0, 0, 0);
+	transition: 0.25s;
+	transform: scale(1.05);
+}
+
+.VolunteerDelivery_VolunteerDelivery .NUMBEROFCOUPONS {
+	position: absolute;
+	left: 50px;
+	top: 90px;
+	width: 323.7px;
+	height: 39.01px;
+	display: flex;
+	align-items: center;
+	color: rgba(255,255,255,1.00);
+	font-family: Poppins;
+	font-size: 29.88px;
+	font-weight: 400;
+	line-height: 35.015625px;
+}
+
+.VolunteerDelivery_VolunteerDelivery .COUPONSDELIVERY {
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	top: 20px;
+	width: 500px;
+	height: 36.37px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	color: white;
+	font-family: Poppins;
+	font-size: 34px;
+	font-weight: 500;
+	line-height: 35.015625px;
+	border-radius: 14pt;
+}
+
+.VolunteerDelivery_VolunteerDelivery .btnBack {
+	position: absolute;
+	right: 50px;
+	top: 47.5px;
+	width: 200px;
+	height: 55px;
+	background: rgba(255,255,255,1.00);
+	border-radius: 40px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	color: rgba(0,0,0,1.00);
+	font-family: Montserrat;
+	font-size: 20px;
+	font-weight: 500;
+	border: 0px;
+}
+
+.VolunteerDelivery_VolunteerDelivery .btnBack:hover {
+	background: rgb(0, 225, 255);
+	color: rgb(0, 0, 0);
+	transition: 0.25s;
+	transform: scale(1.05);
+ }
+
+.VolunteerDelivery_VolunteerDelivery .edtComment {
+	position: absolute;
+	right: 50px;
+	top: 510px;
+	width: 825px;
+	height: 122.83999999999999px;
+	background: rgba(255,255,255,1.00);
+	border-radius: 16.599999999999998px;
+	border: 1px solid rgba(0,0,0,1);
+	box-sizing: border-box;
+	font-family: Montserrat;
+	font-size: 16.56px;
+	font-weight: 500;
+	line-height: 31.125px;
+}
+
+.VolunteerDelivery_VolunteerDelivery .Checkbox {
+	position: absolute;
+	left: 1020.9px;
+	top: 632.4599999999999px;
+	width: 53.949999999999996px;
+	height: 16.599999999999998px;
+}
+.VolunteerDelivery_VolunteerDelivery .Checkbox .Frame {
+	position: relative;
+	flex: none;
+	margin-right: 6.64px;
+	width: 13.28px;
+	height: 16.599999999999998px;
+	display: flex;
+	padding-top: 1.66px;
+	padding-bottom: 1.66px;
+	box-sizing: border-box;
+}
+.VolunteerDelivery_VolunteerDelivery .Checkbox .Frame .Frame_1 {
+	position: relative;
+	flex: none;
+	margin-right: 8.299999999999999px;
+	width: 13.28px;
+	height: 13.28px;
+	display: flex;
+	box-sizing: border-box;
+}
+.VolunteerDelivery_VolunteerDelivery .Checkbox .Frame .Frame_1 .Switch {
+	position: relative;
+	flex: none;
+	margin-right: 8.299999999999999px;
+	width: 13.28px;
+	height: 13.28px;
+}
+.VolunteerDelivery_VolunteerDelivery .Checkbox .Frame .Frame_1 .Switch .Rectangle1 {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 13.28px;
+	height: 13.28px;
+	background: rgba(255,255,255,1.00);
+	border-radius: 6.64px;
+	border: 1px solid rgba(69.3167544901371,52.69999533891678,204.00000303983688,1);
+	box-sizing: border-box;
+}
+.VolunteerDelivery_VolunteerDelivery .Checkbox .Frame .Frame_1 .Ellipse {
+	position: relative;
+	flex: none;
+	margin-right: 8.299999999999999px;
+	width: 6.64px;
+	height: 6.64px;
+	background: rgba(69,53,204,1.00);
+	border-radius: 50%;
+}
+.VolunteerDelivery_VolunteerDelivery .Checkbox .Label {
+	position: relative;
+	flex: none;
+	margin-right: 6.64px;
+	width: 34.03px;
+	height: 16.599999999999998px;
+	color: rgba(255,255,255,1.00);
+	font-family: Montserrat;
+	font-size: 13.28px;
+	font-weight: 500;
+	line-height: 16.599999999999998px;
+}
+
+.VolunteerDelivery_VolunteerDelivery .Header {
+	position: absolute;
+	top: 0;
+	margin-top: 0;
+	width: 100%;
+	height: 150px;
+	background: rgb(224, 64, 64);
+}
+
+.VolunteerDelivery_VolunteerDelivery .Footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 200px;
+	background: rgb(0, 0, 83);
+}

@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import environ
 import os
-import dotenv
 import dj_database_url
 SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 
@@ -22,9 +21,7 @@ environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -129,9 +126,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-RECIPIENT_ADDRESS = env('RECIPIENT_ADDRESS')
+EMAIL_HOST_USER='group39smptp@gmail.com'
+EMAIL_HOST_PASSWORD='jcfumfyybebykqxq'
+RECIPIENT_ADDRESS='ismael.17@live.com'
 
 
 # Password validation

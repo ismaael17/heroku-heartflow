@@ -52,10 +52,10 @@ export default class LoginPage extends Component {
 					volunteer = response.data['userType'] === 'volunteer'
 					let form = document.getElementById("loginForm")
 					if (volunteer === true) {
-						form.action = "http://localhost:3000/volunteerhomepage"
+						form.action = "https://heartflow-support-system.herokuapp.com/volunteerhomepage"
 						localStorage.setItem("Volunteer", "TRUE")
 					} else {
-						form.action = "http://localhost:3000/directorhomepage"
+						form.action = "https://heartflow-support-system.herokuapp.com/directorhomepage"
 						localStorage.setItem("Volunteer", "FALSE")
 					}
 

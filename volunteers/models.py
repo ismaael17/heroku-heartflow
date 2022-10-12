@@ -20,8 +20,7 @@ class Volunteers(AbstractUser):
     status = models.CharField(max_length=30, default="pending_review")
     reason = models.TextField(default="", blank=True)
     registerDate = models.DateField(auto_now_add=True)
-    phone = models.CharField(max_length=20, default="", null = False)
-
+    phone = models.CharField(max_length=20, default="", null=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -29,11 +28,14 @@ class Volunteers(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
-        
+
+
 class discardLost(models.Model):
     amount = models.IntegerField(null=False)
     serial_letter = models.CharField(max_length=1, null=False, default="A")
@@ -43,7 +45,6 @@ class discardLost(models.Model):
     reason = models.TextField(null=False)
     volunteer = models.ForeignKey("Volunteers", on_delete=models.CASCADE, null=True)
     flag = models.BooleanField(default=False)
-
 
 
 class PickedUp(models.Model):
@@ -66,14 +67,15 @@ class Companies(models.Model):
     payment_method = models.CharField(max_length=255, null=False)
     policy = models.CharField(max_length=255, null=False)
     volunteer = models.ForeignKey("Volunteers", on_delete=models.CASCADE, null=True)
-    policy = models.CharField(max_length=255, null=False, default = "None")
-    phone = models.CharField(max_length=20, default="", null = False)
-
+    policy = models.CharField(max_length=255, null=False, default="None")
+    phone = models.CharField(max_length=20, default="", null=False)
+    active = models.BooleanField(default=True)
 
 class exchanges(models.Model):
     amount = models.IntegerField(null=False)
     reason = models.TextField
-    from_volunteer = models.ForeignKey("Volunteers", on_delete=models.CASCADE, related_name="from_volunteer", null=False)
+    from_volunteer = models.ForeignKey("Volunteers", on_delete=models.CASCADE, related_name="from_volunteer",
+                                       null=False)
     to_volunteer = models.ForeignKey("Volunteers", on_delete=models.CASCADE, related_name="to_volunteer", null=False)
     range_from = models.IntegerField(null=False, default=0)
     range_to = models.IntegerField(null=False, default=0)
@@ -85,9 +87,11 @@ class exchanges(models.Model):
 class branch(models.Model):
     name = models.CharField(max_length=255, null=False)
 
+
 class source(models.Model):
     name = models.CharField(max_length=255, null=False)
     branch_source = models.ForeignKey("branch", on_delete=models.CASCADE, related_name="branch_source", null=False)
+
 
 class delivery(models.Model):
     amount = models.IntegerField(null=False)
@@ -96,12 +100,12 @@ class delivery(models.Model):
     range_to = models.IntegerField(default=0)
     date = models.DateTimeField(auto_now=True, null=False)
     comments = models.TextField(null=False)
-    outlet = models.CharField(max_length=255, null=False, default = "")
     volunteer = models.ForeignKey("Volunteers", on_delete=models.CASCADE, null=True)
-    paymentMethod = models.CharField(max_length=255, null=False, default = "None")
+    paymentMethod = models.CharField(max_length=255, null=False, default="None")
     flag = models.BooleanField(default=False)
     paid = models.BooleanField(default=False)
     company = models.ForeignKey("Companies", on_delete=models.CASCADE)
+    payment_method = models.CharField(max_length=255, null=False, default="None")
 
 
 class volunteerCoupons(models.Model):

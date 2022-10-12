@@ -15,12 +15,12 @@ class Volunteers(AbstractUser):
     username = None
     groups = None
     email = models.EmailField(_('email address'), unique=True)
-    branch = models.ForeignKey("branch", on_delete=models.CASCADE, null=False)
+    branch = models.ForeignKey("branch", on_delete=models.CASCADE, null=True)
     couponAmount = models.IntegerField(default=0)
     status = models.CharField(max_length=30, default="pending_review")
     reason = models.TextField(default="", blank=True)
     registerDate = models.DateField(auto_now_add=True)
-    phone = models.CharField(max_length=20, default="", null=False)
+    phone = models.CharField(max_length=20, default="", null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

@@ -15,7 +15,7 @@ class Volunteers(AbstractUser):
     username = None
     groups = None
     email = models.EmailField(_('email address'), unique=True)
-    branch = models.ForeignKey("branch", on_delete=models.CASCADE, null=False, default = 1)
+    branch = models.ForeignKey("branch", on_delete=models.CASCADE, null=False)
     couponAmount = models.IntegerField(default=0)
     status = models.CharField(max_length=30, default="pending_review")
     reason = models.TextField(default="", blank=True)
@@ -61,7 +61,7 @@ class Companies(models.Model):
     repName = models.CharField(max_length=255, null=False)
     repEmail = models.CharField(max_length=255, null=False)
     address = models.CharField(max_length=255, null=False)
-    branch = models.ForeignKey("branch", on_delete=models.CASCADE, null=False, default = 1)
+    branch = models.ForeignKey("branch", on_delete=models.CASCADE, null=False)
     upToDate = models.BooleanField(default=False)
     payment_method = models.CharField(max_length=255, null=False)
     policy = models.CharField(max_length=255, null=False)
@@ -101,7 +101,7 @@ class delivery(models.Model):
     paymentMethod = models.CharField(max_length=255, null=False, default = "None")
     flag = models.BooleanField(default=False)
     paid = models.BooleanField(default=False)
-    company = models.ForeignKey("Companies", on_delete=models.CASCADE, default = 1)
+    company = models.ForeignKey("Companies", on_delete=models.CASCADE)
 
 
 class volunteerCoupons(models.Model):

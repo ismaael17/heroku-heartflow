@@ -139,7 +139,7 @@ class patchPendingVolunteer(APIView):
 
                 volunteer.status = "approve"
                 token = encoded_reset_token(volunteer.id)
-                link = 'http://' + 'heartflow-support-system.herokuapp.com/' + '/setpassword' + "?token=" + token + "&email=" + volunteer.email
+                link = 'http://' + 'heartflow-support-system.herokuapp.com' + '/setpassword' + "?token=" + token + "&email=" + volunteer.email
                 html_context = {'url': link}
                 msg = EmailMultiRelated('Volunteer Request Approved!', 'Plain text version', 'Heartflow',
                                         [volunteer.email])
@@ -299,7 +299,10 @@ class registerCompany(APIView):
             if id == 0:
                 volunteer = request.user
                 companies = Companies.objects.filter(branch=volunteer.branch)
+                print(volunteer.branch)
+
                 for i in range(0, len(companies)):
+                    print(companies[i].branch)
                     volunteer_deliveries = delivery.objects.filter(company=companies[i].id)
                     utd = True
                     for j in range(0, len(volunteer_deliveries)):
@@ -460,13 +463,12 @@ class deliveries(APIView):
     def get(self, request, paid="", id=0):
         if request.method == 'GET':
             if paid != "":
-                companyBranch = Companies.objects.filter(branch=request.user.branch)
                 if paid == "true":
-                    delivery_obj = delivery.objects.filter(paid=True).filter(company__in=companyBranch)
+                    delivery_obj = delivery.objects.filter(paid=True).filter(volunteer = request.user.id)
                 elif paid == "false":
-                    delivery_obj = delivery.objects.filter(paid=False).filter(company__in=companyBranch)
+                    delivery_obj = delivery.objects.filter(paid=False).filter(volunteer = request.user.id)
                 elif paid == "All":
-                    delivery_obj = delivery.objects.filter(company__in=companyBranch)
+                    delivery_obj = delivery.objects.filter(volunteer = request.user.id)
                 else:
                     delivery_obj = delivery.objects
                 delivery_serializer = deliverySerializer(delivery_obj, many=True)

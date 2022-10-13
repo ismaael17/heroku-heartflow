@@ -61,6 +61,7 @@ export default function VolunteerHomePage() {
 			setDataGridRows(dataGridRows => [])
 			for (let i = 0; i < response.data['length']; i++) {
 				//Edit this data here
+				console.log("id is " + response.data[i]['id'])
 				setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'], firstName: response.data[i]['name'], lastName: response.data[i]['surname'], coupons: response.data[i]['amount'], branch: response.data[i]['branch'], paid: response.data[i]['paid'], status: response.data[i]['status'] }])
 			}
 		})
@@ -103,6 +104,7 @@ export default function VolunteerHomePage() {
 			setDataGridRows(dataGridRows => [])
 			for (let i = 0; i < response.data['length']; i++) {
 				//Edit this data here
+				console.log("id is " + response.data[i]['id'])
 				setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'], firstName: response.data[i]['name'], lastName: response.data[i]['surname'], coupons: response.data[i]['amount'], branch: response.data[i]['branch'], paid: response.data[i]['paid'], status: response.data[i]['status'] }])
 			}
 		})

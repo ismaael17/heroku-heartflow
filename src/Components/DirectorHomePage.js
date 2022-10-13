@@ -81,7 +81,7 @@ export default function DirectorHomePage() {
         ).then(response => {
             for (let i = 0; i < response.data['length']; i++) {
                 //Edit this data here
-                console.log("id is " + response.data[i])
+                console.log("id is " + response.data[i]['id'])
                 setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'], firstName: response.data[i]['first_name'], lastName: response.data[i]['last_name'], date: response.data[i]['registerDate'], phone: response.data[i]['phone'], email: response.data[i]['email'], status: response.data[i]['status'] }])
             }
         })
@@ -106,7 +106,7 @@ export default function DirectorHomePage() {
             "pending_review"
         ).then(response => {
             for (let i = 0; i < response.data['length']; i++) {
-                console.log("id is " + response.data[i])
+                console.log("id is " + response.data[i]['id'])
                 setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'], firstName: response.data[i]['first_name'], lastName: response.data[i]['last_name'],date: response.data[i]['registerDate'], phone: response.data[i]['phone'], email: response.data[i]['email'], status: response.data[i]['status'] }])
             }
         })

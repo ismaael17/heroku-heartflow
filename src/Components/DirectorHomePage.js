@@ -175,7 +175,8 @@ export default function DirectorHomePage() {
                             columns={columns}
                             pageSize={5}
                             rowsPerPageOptions={[5]}
-                            getRowId={(row) => row.id}
+                            getRowId={(rows) => rows.id}
+                            
                             onSelectionModelChange={async (newSelection) => {
                                 setSelection(newSelection.selectionModel)
                                 globalNewSelection = newSelection

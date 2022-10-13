@@ -50,7 +50,7 @@ export default class VolunteerPickUpPage extends Component {
 			).then(response => {
 				if (response.status === 200) {
 					// toast.success("Successfully logged the pickup from" + this.state.location, {autoClose:3000})
-					alert("Successfully logged the pickup from " + this.state.location.split(" ", 2)[1])
+					alert("Successfully logged the pickup from " + this.state.location)
 				} else {
 					// toast.error("There has been an error", {autoClose:3000})
 					alert("There has been an error")
@@ -122,7 +122,7 @@ export default class VolunteerPickUpPage extends Component {
 						<span className='COUPONSPICKUP'>COUPONS PICK UP</span>
 
 						<ToastContainer />
-						<form id="pickupForm" action="https://heartflow-support-system.herokuapp.com/volunteerhomepage">
+						<form id="pickupForm" action="http://localhost:3000/volunteerhomepage">
 							<input type='number' className='edtNrCoupon' onChange={this.onChangeCouponAmount} required={true} min={1} defaultValue={1} />
 							<select className='edtLocation' onChange={this.onChangeLocation} required={true}>
 								{locationList.map((location) => {

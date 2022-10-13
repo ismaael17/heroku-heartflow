@@ -11,7 +11,7 @@ urlpatterns = [
     path('login', obtain_auth_token, name='login'),
     path('reset-password/<token>', views.resetPassword, name = 'reset-password/token'),
     re_path(r'^get-pending-volunteers', views.pendingVolunteer.as_view(), name = 'pending-volunteers'),
-    re_path(r'^pending-volunteers/(?P<status>\w+)/$', views.pendingVolunteer.as_view(), name = 'pending-volunteers'),
+    path('pending-volunteers/<status>', views.pendingVolunteer.as_view(), name = 'pending-volunteers'),
     path('user-type', views.userType.as_view(), name = 'user-type'),
     path('reset_password', auth_views.PasswordResetView.as_view(template_name='./registration/password_reset_form.html'), name='reset_password'),
     path('reset_password_sent', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),

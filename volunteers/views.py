@@ -215,7 +215,7 @@ class pendingVolunteer(APIView):
                 )
 
                 return HttpResponse(status=200)
-
+    @csrf_exempt
     def get(self, request, status=""):
         if request.method == 'GET':
             if status == "":
@@ -230,6 +230,7 @@ class pendingVolunteer(APIView):
 class userType(APIView):
     permission_classes = (IsAuthenticated,)
 
+    @csrf_exempt
     def get(self, request):
         if request.method == 'GET':
             user = request.user
@@ -241,7 +242,8 @@ class userType(APIView):
 
 class pickedUp(APIView):
     permission_classes = (IsAuthenticated,)
-
+    
+    @csrf_exempt
     def post(self, request):
         if request.method == 'POST':
             pickedUp_data = JSONParser().parse(request)
@@ -261,7 +263,7 @@ class pickedUp(APIView):
 
             print(serializer.errors)
             return HttpResponse(status=400)
-
+    @csrf_exempt
     def get(self, request):
         if request.method == 'GET':
             volunteer = request.user
@@ -272,7 +274,7 @@ class pickedUp(APIView):
 
 class registerCompany(APIView):
     permission_classes = (IsAuthenticated,)
-
+    @csrf_exempt
     def post(self, request):
         if request.method == 'POST':
             company_data = JSONParser().parse(request)
@@ -287,7 +289,7 @@ class registerCompany(APIView):
 
             print(serializer.errors)
             return HttpResponse(status=400)
-
+    @csrf_exempt
     def get(self, request, id=0):
         if request.method == 'GET':
             if id == 0:
@@ -348,6 +350,7 @@ class registerCompany(APIView):
 class updateCompany(APIView):
     permission_classes = (IsAuthenticated,)
 
+    @csrf_exempt
     def patch(self, request, id=0):
         if request.method == 'PATCH':
             company_data = JSONParser().parse(request)
@@ -362,6 +365,7 @@ class updateCompany(APIView):
 class discardLost(APIView):
     permission_classes = (IsAuthenticated,)
 
+    @csrf_exempt
     def post(self, request):
         if request.method == 'POST':
             discardLost_data = JSONParser().parse(request)
@@ -436,13 +440,7 @@ class discardLost(APIView):
             print(serializer.errors)
             return HttpResponse(status=400)
 
-    def get(self, request):
-        if request.method == 'GET':
-            volunteer = request.user
-            discardLost = discardLostSerializer.objects.filter(volunteer=volunteer)
-            serializer = discardLostSerializer(discardLost, many=True)
-            return JsonResponse(serializer.data, safe=False)
-
+    @csrf_exempt
     def get(self, request):
         if request.method == 'GET':
             volunteer = request.user
@@ -531,6 +529,7 @@ class coupons(APIView):
 class exchange(APIView):
     permission_classes = (IsAuthenticated,)
 
+    @csrf_exempt
     def post(self, request):
         if request.method == 'POST':
             exchange_data = JSONParser().parse(request)
@@ -602,6 +601,7 @@ class exchange(APIView):
 class deliver(APIView):
     permission_classes = (IsAuthenticated,)
 
+    @csrf_exempt
     def post(self, request):
         if request.method == 'POST':
             # TODO Fill in the rest of the fields like Payment Method
@@ -679,7 +679,7 @@ class deliver(APIView):
 
             print(serializer.errors)
             return HttpResponse(status=400)
-
+    @csrf_exempt
     def get(self, request):
         if request.method == 'GET':
             volunteer = request.user
@@ -724,13 +724,14 @@ def branchCRUD(request):
 class sources(APIView):
     permission_classes = (IsAuthenticated,)
 
+    @csrf_exempt
     def get(self, request):
         if request.method == 'GET':
             volunteer = request.user
             sources = source.objects.filter(branch_source=volunteer.branch)
             serializer = sourceSerializer(sources, many=True)
             return JsonResponse(serializer.data, safe=False)
-
+    @csrf_exempt
     def post(self, request):
         if request.method == 'POST':
             source_data = JSONParser().parse(request)

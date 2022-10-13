@@ -122,7 +122,7 @@ export default class VolunteerPickUpPage extends Component {
 						<span className='COUPONSPICKUP'>COUPONS PICK UP</span>
 
 						<ToastContainer />
-						<form id="pickupForm" action="http://localhost:3000/volunteerhomepage">
+						<form id="pickupForm" action="https://heartflow-support-system.herokuapp.com/volunteerhomepage">
 							<input type='number' className='edtNrCoupon' onChange={this.onChangeCouponAmount} required={true} min={1} defaultValue={1} />
 							<select className='edtLocation' onChange={this.onChangeLocation} required={true}>
 								{locationList.map((location) => {

@@ -175,7 +175,7 @@ export default function DirectorHomePage() {
                             columns={columns}
                             pageSize={5}
                             rowsPerPageOptions={[5]}
-                            // checkboxSelection
+                            getRowId={(row) => row.id}
                             onSelectionModelChange={async (newSelection) => {
                                 setSelection(newSelection.selectionModel)
                                 globalNewSelection = newSelection

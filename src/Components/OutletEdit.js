@@ -1,16 +1,16 @@
 import React, {Component} from 'react'
-import './OutletRegistration.css'
-import {Link} from 'react-router-dom'
+import './OutletEdit.css'
+import {Link, useLocation} from 'react-router-dom'
 import VolunteersService from "../Services/volunteers.service";
 import logo from '../public/HeartFlow_Logo_02.png'
 import AuthService from "../Services/auth.service";
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-
 let branchList = []
+let id
 
-export default class OutletRegistration extends Component {
+export default class OutletEdit extends Component {
 	constructor(props) {
 		super(props);
 
@@ -22,21 +22,24 @@ export default class OutletRegistration extends Component {
 		this.onChangeBranch = this.onChangeBranch.bind(this)
 		this.onChangePayment = this.onChangePayment.bind(this)
 		this.onChangePolicy = this.onChangePolicy.bind(this)
+		this.inactive = this.inactive.bind(this)
 		this.submit = this.submit.bind(this)
 
-
 		this.state = {
-			outlet: "",
-			rep: "",
-			email: "",
-			phone: "",
-			address: "",
-			branch: "",
-			payment: "",
-			policy: "",
-			paymentList: [],
-			policyList: [],
+				outlet: "",
+				rep: "",
+				email: "",
+				phone: "",
+				address: "",
+				branch: "",
+				payment: "",
+				policy: "",
+				compId: "",
+				paymentList: [],
+				policyList: [],
+				active: true,
 		}
+
 
 		AuthService.getBranches(
 		).then(response => {
@@ -46,6 +49,26 @@ export default class OutletRegistration extends Component {
 			}
 			this.forceUpdate()
 		})
+		let paramString = (window.location.href).split('?')[1];
+		id = paramString.split("=")[1];
+
+		VolunteersService.getOutlet(
+			localStorage.getItem("userToken"),
+			id
+		).then(response => {
+			this.setState({
+				outlet: response.data.companyName,
+				rep: response.data.repName,
+				email: response.data.repEmail,
+				phone: response.data.phone,
+				address: response.data.address,
+				branch: response.data.branch,
+				payment: response.data.payment_method,
+				policy: response.data.policy,
+				active: response.data.active
+			})
+		}
+		)
 
 		this.paymentList = [
 			"Cash on delivery",
@@ -61,16 +84,10 @@ export default class OutletRegistration extends Component {
 		]
 	}
 
-	// componentDidMount() {
-	// 	if (localStorage.getItem("userToken") == null) {
-	// 	window.location.href = "/loginpage"
-	// 	}
-	// }
-
 	async submit(e) {
-		let form = document.getElementById("outletregistrationForm")
+		let form = document.getElementById("outleteditForm")
 		if (form.checkValidity()) {
-			await VolunteersService.registerOutlet(
+			await VolunteersService.editOutlet(
 				localStorage.getItem("userToken"),
 				this.state.outlet,
 				this.state.rep,
@@ -79,21 +96,20 @@ export default class OutletRegistration extends Component {
 				this.state.address,
 				this.state.branch,
 				this.state.payment,
-				this.state.policy
+				this.state.policy,
+				this.state.active,
+				id
 			).then(response => {
 				if (response.status === 200) {
-					// toast.success("Successfully registered the company")
-					alert("Successfully registered the company")
-				} else if (response.status === 400) {
-					// toast.warn("This company is already registered")
-					alert("This company is already registered")
+					// toast.success("Successfully edited the company details.")
+					alert("Successfully edited the company details.")
 				} else {
 					// toast.error("Unknown database error")
 					alert("Unknown database error")
 				}
 			})
-			form.submit()
 			//RESPONSE
+			form.submit()
 		} else {
 			form.reportValidity()
 		}
@@ -153,6 +169,19 @@ export default class OutletRegistration extends Component {
 		}
 	}
 
+	inactive() {
+		if (this.state.active) {
+			this.setState({
+				active: false
+			})
+			toast.success("You have set this company as inactive!")
+		} else {
+			this.setState({
+				active: true
+			})
+			toast.success("You have set this company as active again")
+		}
+	}
 
 
 	render() {
@@ -160,7 +189,7 @@ export default class OutletRegistration extends Component {
 			window.location.href = "/loginpage"
 		} else {
 			return (
-				<div className='OutletRegistration_OutletRegistration'>
+				<div className='OutletEdit'>
 
 					<div className='Header'/>
 					<div className='Footer'/>
@@ -178,38 +207,39 @@ export default class OutletRegistration extends Component {
 						<span className='OUTLETDETAILS'>OUTLET DETAILS</span>
 						<span className='OUTLETNAME'>OUTLET NAME</span>
 
-					<form id="outletregistrationForm" action="http://localhost:3000/volunteerhomepage">
-						<input type='text' className='edtOutName' onChange={this.onChangeOutlet} required={true} maxLength={50}/>
-						<input type='text' className='edtRepName' onChange={this.onChangeRep} required={true} maxLength={50}/>
-						<input type='email' className='edtRepEmail' onChange={this.onChangeEmail} required={true}/>
-						<input type='tel' className='edtRepNr' onChange={this.onChangePhone} required={true} pattern="[0-9]{10}"/>
-						<input type='text' className='edtAddress' onChange={this.onChangeAddress} required={true}/>
-						<select className='edtBranch' onChange={this.onChangeBranch} required={true} defaultValue={branchList[0]}>
+					<form id="outleteditForm" action="http://localhost:3000/volunteerhomepage">
+						<input type='text' className='edtOutName' onChange={this.onChangeOutlet} value={this.state.outlet} required={true} maxLength={50}/>
+						<input type='text' className='edtRepName' onChange={this.onChangeRep} required={true} value={this.state.rep} maxLength={50}/>
+						<input type='email' className='edtRepEmail' onChange={this.onChangeEmail} value={this.state.email} required={true}/>
+						<input type='tel' className='edtRepNr' onChange={this.onChangePhone} required={true} value={this.state.phone} pattern="[0-9]{10}"/>
+						<input type='text' className='edtAddress' onChange={this.onChangeAddress} value={this.state.address} required={true}/>
+						<select className='edtBranch' onChange={this.onChangeBranch} required={true} value={this.state.branch}>
 							{branchList.map((branch) => {
 								return <option value={branch}>{branch}</option>
 							})}
-							<option value="" disabled selected hidden>Choose a Branch</option>
 						</select>
-						<select className='edtPayAgree' onChange={this.onChangePayment} required={true}>
+						<select className='edtPayAgree' onChange={this.onChangePayment} value={this.state.paymentMethod} required={true}>
 							{this.paymentList.map((payment) => {
 								return <option value={payment}>{payment}</option>
 							})}
-							<option value="" disabled selected hidden>Choose a Payment</option>
 						</select>
-						<select className='edtPolicy' onChange={this.onChangePolicy} required={true}>
+						<select className='edtPolicy' onChange={this.onChangePolicy} value={this.state.policy} required={true}>
 								{this.policyList.map((policy) => {
 									return <option value={policy}>{policy}</option>
 								})}
-							<option value="" disabled selected hidden>Choose a Policy</option>
 						</select>
 					</form>
 
 						<button className='btnConfirm' onClick={this.submit}>
 							CONFIRM
 						</button>
+
+						<button className="btnActive" onClick={this.inactive}>
+							INACTIVE
+						</button>
 					</div>
 
-					<Link to='/volunteerhomepage'>
+					<Link to='/volunteerhomepage_outlets'>
 						<div className='btnBack'>BACK</div>
 					</Link>
 

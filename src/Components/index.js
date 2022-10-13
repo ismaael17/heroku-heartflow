@@ -7,6 +7,7 @@ export default function __HomePage__ () {
 		<Link to='/DirectorHomeMenu'><div>DirectorHomeMenu</div></Link>
 		<Link to='/VolunteerSignUp'><div>VolunteerSignUp</div></Link>
 		<Link to='/VolunteerHomePage'><div>VolunteerHomePage</div></Link>
+		<Link to='/VolunteerHomePage_Deliveries'><div>VolunteerHomePage</div></Link>
 		<Link to='/HomePage'><div>HomePage</div></Link>
 		<Link to='/LoginPage'><div>LoginPage</div></Link>
 		<Link to='/EditDirectorPage'><div>EditDirectorPage</div></Link>

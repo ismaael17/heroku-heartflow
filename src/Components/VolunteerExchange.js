@@ -3,6 +3,8 @@ import './VolunteerExchange.css'
 import { Link } from 'react-router-dom'
 import VolunteersService from "../Services/volunteers.service";
 import logo from '../public/HeartFlow_Logo_02.png'
+import {toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 let volunteerList = []
@@ -103,15 +105,18 @@ export default class VolunteerExchange extends React.Component {
 					volunteerId
 			).then(response => {
 					if (response.status === 200) {
-						alert("Successfully logged the exchanged coupons")
+						// toast.success("Successfully logged the exchanged coupons", {autoClose:3000})
+						alert("Successfully logged the exchange coupons")
 					} else if (response.status === 201) {
-						alert("This has been flagged as there is no record of this coupons")
+						// toast.warn("This has been flagged as there is no record of this coupons, but has been logged!", {autoClose:4000})
+						alert("This has been flagged as there is no record of this coupons, but has been logged!")
 					} else {
+						// toast.error("Unknown database error", {autoClose:3000})
 						alert("Unknown database error")
 					}
+					form.submit()
 				})
 				//RESPONSE
-				form.submit()
 			} else {
 				form.reportValidity()
 			}
@@ -126,7 +131,7 @@ export default class VolunteerExchange extends React.Component {
 					<div className='Header'/>
 					<div className='Footer'/>
 					<img className='logo' src = {logo} alt="Heartflow logo"/>
-
+					<ToastContainer />
 					<div className='pnlMain'>
 						<span className='VOLUNTEEROFEXCHANGE'>VOLUNTEER OF EXCHANGE</span>
 						<span className='NUMBEROFCOUPONS'>NUMBER OF COUPONS</span>

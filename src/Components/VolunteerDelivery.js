@@ -4,6 +4,9 @@ import {Link} from 'react-router-dom'
 import CheckedYesLabelYesStateDefault from "./CheckedYesLabelYesStateDefault"
 import VolunteersService from "../Services/volunteers.service";
 import logo from '../public/HeartFlow_Logo_02.png'
+import {toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 let outletList = []
@@ -32,7 +35,7 @@ export default class VolunteerDelivery extends Component {
 		).then(response => {
 			outletList = []
 			for (let i = 0; i < response.data.length; i++) {
-				outletList.push(response.data[i].companyName)
+				outletList.push(response.data[i].id + " " +response.data[i].companyName)
 			}
 			this.forceUpdate()
 		})
@@ -41,6 +44,8 @@ export default class VolunteerDelivery extends Component {
 
 	async submit(e) {
 			let form = document.getElementById("deliveryForm")
+			let comp_id = this.state.outlet.split(" ")[0]
+			console.log(comp_id)
 			if (form.checkValidity()) {
 				await VolunteersService.deliveredCoupons(
 					localStorage.getItem("userToken"),
@@ -49,14 +54,17 @@ export default class VolunteerDelivery extends Component {
 					this.state.serialLetter,
 					this.state.rangeBegin,
 					this.state.rangeEnd,
-					this.state.outlet
+					comp_id
 				).then(response => {
 					console.log(response)
 					if (response.status === 200) {
-						alert("Succesfully logged the delivery at " + this.state.outlet)
+						// toast.success("Succesfully logged the delivery at " + this.state.outlet)
+						alert("Successfully logged the delivery at " + this.state.outlet)
 					} else if (response.status === 201) {
-						alert("This delivery has been flagged for duplicate values")
+						// toast.warn("This delivery has been flagged for duplicate values")
+						alert("his delivery has been flagged for duplicate values, but has been logged")
 					} else {
+						// toast.error("Database error")
 						alert("Database error")
 					}
 				})
@@ -121,7 +129,7 @@ export default class VolunteerDelivery extends Component {
 					<div className='Header'/>
 					<div className='Footer'/>
 					<img className='logo' src = {logo} alt="Heartflow logo"/>
-					
+					<ToastContainer />
 					<div className='pnlMain'>
 
 						<span className='RANGEEND'>RANGE END</span>

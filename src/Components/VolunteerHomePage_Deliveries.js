@@ -1,9 +1,9 @@
-import React, { Component, useEffect } from 'react'
-import './VolunteerHomePage.css'
-import { Link } from 'react-router-dom'
-import { Container } from '../Container'
+import React, {Component, useEffect} from 'react'
+import './VolunteerHomePage_Deliveries.css'
+import {Link} from 'react-router-dom'
+import {Container} from '../Container'
 import VolunteersService from "../Services/volunteers.service";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import {DataGrid, GridColDef, GridValueGetterParams} from "@mui/x-data-grid";
 import logo from '../public/HeartFlow_Logo_02.png'
 import emblem from '../public/HF_emblem.png'
 import igLogo from '../public/ig_logo.png'
@@ -11,32 +11,18 @@ import fbLogo from '../public/fb_logo.png'
 
 var globalNewSelection
 
-let changeInSelection = false
-
-let name
-let branch
-let surname
-let coupons
-let paid
-let status_form
-
-const status = [
-	"PAYMENT_COMPLETE",
-	"PROCESSING",
-	"ACCEPT",
-	"DELIVERY_IN_PROGRESS",
-	"DELIVERED",
-	"ORDER_DELAYED"
+let status = [
+	"Paid",
+	"Not Paid"
 ]
-
 const columns: GridColDef[] = [
-	{ field: 'id', headerName: 'ID', width: 70 },
-	{ field: 'firstName', headerName: 'First name', width: 150 },
-	{ field: 'lastName', headerName: 'Last name', width: 150 },
-	{ field: 'coupons', headerName: 'No. of Coupons', width: 180 },
-	{ field: 'branch', headerName: 'Branch', width: 200 },
-	{ field: 'paid', headerName: 'Paid (R)', width: 90 },
-	{ field: 'status', headerName: 'Status', width: 180 },
+  { field: 'id', headerName: 'ID', width: 70 },
+  { field: 'company', headerName: 'Company', width: 150 },
+  { field: 'paymentMethod', headerName: 'Payment Method', width: 150 },
+  { field: 'amount', headerName: 'No. of Coupons', width: 180 },
+  { field: 'paid', headerName: 'Paid', width: 200 },
+  { field: 'date', headerName: 'Date', width: 90 },
+  { field: 'comments', headerName: 'Comment', width: 180 },
 ];
 
 function logout() {
@@ -45,24 +31,24 @@ function logout() {
 }
 
 
-export default function VolunteerHomePage() {
+export default function VolunteerHomePage_Deliveries() {
 
 	const [select_status, setStatus] = React.useState(["None"]);
-	const [table_status, setTable] = React.useState(["PAYMENT_COMPLETE"]);
+	const [table_status, setTable] = React.useState(["All"]);
 	const [dataGridRows, setDataGridRows] = React.useState([]);
 	const [select, setSelection] = React.useState([]);
 
 
 	function changeTable() {
-		VolunteersService.getOnlineOrders(
+		VolunteersService.getDeliveries(
 			localStorage.getItem("userToken"),
 			table_status
 		).then(response => {
 			setDataGridRows(dataGridRows => [])
 			for (let i = 0; i < response.data['length']; i++) {
 				//Edit this data here
-				setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'], firstName: response.data[i]['name'], lastName: response.data[i]['surname'], coupons: response.data[i]['amount'], branch: response.data[i]['branch'], paid: response.data[i]['paid'], status: response.data[i]['status'] }])
-			}
+                setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'],  company :response.data[i]['company'], paymentMethod: response.data[i]['paymentMethod'], amount: response.data[i]['amount'], paid:response.data[i]['paid'], date: response.data[i]['date'], comments: response.data[i]['comments']}])
+            }
 		})
 	}
 
@@ -78,12 +64,19 @@ export default function VolunteerHomePage() {
 		window.location.reload(false);
 	}
 
-	function changeStatus() {
+	async function changePaid() {
 		//THOMAS DIE IS NET VIR JOU
 		if (select_status[0] !== "None") {
-			document.getElementById("triggerButton").click()
+			await VolunteersService.changePaid(
+				localStorage.getItem("userToken"),
+				select_status,
+				globalNewSelection[0]
+			).then(response => {
+				alert("Succesfull change")
+			})
+			window.location.reload(false);
 		} else {
-			alert("Please select a new status for the order!")
+			alert("Please change to 'Not Paid' or 'Paid' for the order!")
 		}
 	}
 
@@ -96,15 +89,15 @@ export default function VolunteerHomePage() {
 	}
 
 	useEffect(() => {
-		VolunteersService.getOnlineOrders(
+		VolunteersService.getDeliveries(
 			localStorage.getItem("userToken"),
-			"PAYMENT_COMPLETE"
+			"All"
 		).then(response => {
 			setDataGridRows(dataGridRows => [])
 			for (let i = 0; i < response.data['length']; i++) {
 				//Edit this data here
-				setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'], firstName: response.data[i]['name'], lastName: response.data[i]['surname'], coupons: response.data[i]['amount'], branch: response.data[i]['branch'], paid: response.data[i]['paid'], status: response.data[i]['status'] }])
-			}
+                setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'],  company :response.data[i]['company'], paymentMethod: response.data[i]['payment_method'], amount: response.data[i]['amount'], paid:response.data[i]['paid'], date: response.data[i]['date'], comments: response.data[i]['comments']}])
+            }
 		})
 	}, [])
 
@@ -121,18 +114,18 @@ export default function VolunteerHomePage() {
 					<a href="http://localhost:3000/volunteerhomepage_Deliveries">Deliveries</a>
 					<a href="http://localhost:3000/volunteerhomepage_outlets">Outlets</a>
 				</div>
-				<div className='VolunteerHomePage_VolunteerHomePage'>
-					<div className='Header' />
-					<div className='Footer' />
-					<img className='logo' src={logo} />
-					<img className='emblem' src={emblem} />
+				<div className='VolunteerHomePage_Deliveries'>
+					<div className='Header'/>
+					<div className='Footer'/>
+					<img className='logo' src = {logo}/>
+					<img className='emblem' src = {emblem}/>
 					<div className='Footer'>
 						<span className='CONTACT'>CONTACT US</span>
 						<Link to={{ pathname: "https://www.instagram.com/heartflow_npc/" }} target="_blank">
-							<img className='IG_logo' src={igLogo} />
+							<img className='IG_logo' src = {igLogo}/>
 						</Link>
 						<Link to={{ pathname: "https://www.facebook.com/HeartFlowHomeless/" }} target="_blank">
-							<img className='FB_logo' src={fbLogo} />
+							<img className='FB_logo' src = {fbLogo}/>
 						</Link>
 					</div>
 
@@ -145,24 +138,14 @@ export default function VolunteerHomePage() {
 							onSelectionModelChange={async (newSelection) => {
 								setSelection(newSelection.selectionModel)
 								globalNewSelection = newSelection
-								await VolunteersService.getOrderDetails(
+								await VolunteersService.getDeliveryDetails(
 									localStorage.getItem("userToken"),
 									globalNewSelection[0]
 								).then(response => {
-
-									name = response.data['name']
-									branch = response.data['branch']
-									surname = response.data['surname']
-									coupons = response.data['amount']
-									paid = response.data['paid']
-									status_form = response.data['status']
-
 									document.getElementById("form_status").disabled = false
-
 								})
 							}}
-							sx={{
-								top: '191px',
+							sx={{	top: '191px',
 								left: '50%',
 								color: 'rgb(0, 0, 0)',
 								fontFamily: 'Montserrat',
@@ -173,7 +156,7 @@ export default function VolunteerHomePage() {
 								borderRadius: '40px',
 								backgroundColor: 'rgb(13, 207, 240)',
 								opacity: '0.98',
-							}} />
+							 }}/>
 					</div>
 
 					<div className='pnlMain'>
@@ -208,36 +191,26 @@ export default function VolunteerHomePage() {
 					</Link>
 
 					<div className='pnlTable'>
-						<span className='TABLE'>TABLE</span>
+					<span className='TABLE'>TABLE</span>
+					<select className='status' onChange={event => setTable(event.target.value)} onClick={changeTable} defaultValue={"All"}>
+						<option value="All">All</option>
+						{status.map((status) => { return <option value={status}>{status}</option> })}
+					</select>
 
-						<select className='form_status' id="form_status" onChange={event => setStatus(event.target.value)} disabled={true}>
+					<select className='form_status' id="form_status" onChange={event => setStatus(event.target.value)} disabled={true}>
 							{status.map((status) => { return <option value={status}>{status}</option> })}
-							<option value="" disabled selected hidden>Choose a Status</option>
-						</select>
+							<option value="" disabled selected hidden>Change Paid</option>
+					</select>
 
-						<select className='status' onChange={event => setTable(event.target.value)} onClick={changeTable} defaultValue={status[0]}>
-							{status.map((status) => { return <option value={status}>{status}</option> })}
-						</select>
+					<button className="popupButton" onClick={changePaid}>
+						UPDATE PAID
+					</button>
 
-						<button className="popupButton" onClick={changeStatus}>
-							UPDATE STATUS
-						</button>
-
-						<button className="btnNavbar" onClick={openNav}>
-							NAVIGATION
-						</button>
-					</div>
+					<button className="btnNavbar" onClick={openNav}>
+						NAVIGATION
+					</button>
 				</div>
-
-				<Container className="changeStatusPopUp" id="container" triggerText="Change Status" onSubmit={handleSubmit}
-					field_1={name}
-					field_2={branch}
-					field_3={select_status}
-					field_4={surname}
-					field_5={coupons}
-					field_6={paid}
-					director={false}
-				/>
+			</div>
 
 			</div>
 		)

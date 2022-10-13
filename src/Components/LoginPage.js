@@ -1,6 +1,6 @@
 import './LoginPage.css'
 import React, {Component} from "react";
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {Button} from "@material-ui/core";
 import authService from "../Services/auth.service";
 import logo from '../public/HeartFlow_Logo_02.png'
@@ -113,7 +113,7 @@ export default class LoginPage extends Component {
 					<Button className='btnConfirm' onClick={this.handleLogin}>
 						CONFIRM
 					</Button>
-					<Link to={{ pathname: "http://127.0.0.1:8000/reset_password" }} target="_blank">
+					<Link to={{ pathname: "https://heartflow-support-system.herokuapp.com/reset_password" }} target="_blank">
 						<Button className='btnForgot'>
 							Forgot Password?
 						</Button>

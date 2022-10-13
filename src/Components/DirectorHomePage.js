@@ -57,22 +57,13 @@ export default function DirectorHomePage() {
         })
     }, [])
 
-    // function accept() {
-    //     // Get directors token from localstorage an call the accept request
-    //     AuthService.acceptVolunteer(
-    //         localStorage.getItem("userToken"),
-    //         globalNewSelection[0]
-    //     )
-    // }
-    //
-    // function reject() {
-    //     // Get direcotrs token from localstorage and call the reject request
-    //     console.log(globalNewSelection)
-    //     AuthService.rejectVolunteer(
-    //         localStorage.getItem("userToken"),
-    //         globalNewSelection[0]
-    //     )
-    // }
+    function openNav() {
+		document.getElementById("mySidenav").style.width = "250px";
+	}
+
+	function closeNav() {
+  		document.getElementById("mySidenav").style.width = "0";
+	}
 
     function changeStatus() {
         //THOMAS DIE IS NET VIR JOU
@@ -91,13 +82,14 @@ export default function DirectorHomePage() {
             setDataGridRows(dataGridRows => [])
             for (let i = 0; i < response.data['length']; i++) {
                 //Edit this data here
-                setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'], firstName: response.data[i]['first_name'], lastName: response.data[i]['last_name'], date: response.data[i]['registerDate'], phone: response.data[i]['phone'], email: response.data[i]['email'], status: response.data[i]['status'] }],)
+                setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'], firstName: response.data[i]['first_name'], lastName: response.data[i]['last_name'], age: '69', date: response.data[i]['registerDate'], phone: response.data[i]['phone'], email: response.data[i]['email'], status: response.data[i]['status'] }],)
             }
         })
     }
 
     async function handleSubmit() {
         console.log(meeting_date === undefined)
+        console.log(meeting_date)
         await AuthService.changeStatus(
             localStorage.getItem("userToken"),
             globalNewSelection[0],
@@ -113,17 +105,29 @@ export default function DirectorHomePage() {
             localStorage.getItem("userToken"),
             "pending_review"
         ).then(response => {
+            setDataGridRows(dataGridRows => [])
             for (let i = 0; i < response.data['length']; i++) {
-                setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'], firstName: response.data[i]['first_name'], lastName: response.data[i]['last_name'], date: response.data[i]['registerDate'], phone: response.data[i]['phone'], email: response.data[i]['email'], status: response.data[i]['status'] }],)
+                setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'], firstName: response.data[i]['first_name'], lastName: response.data[i]['last_name'], age: '69', date: response.data[i]['registerDate'], phone: response.data[i]['phone'], email: response.data[i]['email'], status: response.data[i]['status'] }],)
             }
         })
     }, [])
+
+    function admin() {
+        window.location.href = "https://heartflow-support-system.herokuapp.com/admin"
+    }
 
     if (localStorage.getItem("userToken") == null) {
         window.location.href = "/loginpage"
     } else {
         return (
             <div>
+                <div id="mySidenav" className="sidenav">
+					<a href="javascript:void(0)" className="closebtn" onClick={closeNav}>&times;</a>
+                    <a href="http://localhost:3000/directorhomepage">Volunteers</a>
+					<a href="http://localhost:3000/directorhomepage_coupons">Online Coupons</a>
+					<a href="http://localhost:3000/directorhomepage_Deliveries">Deliveries</a>
+					<a href="http://localhost:3000/directorhomepage_outlets">Outlets</a>
+				</div>
                 <div className='DirectorHomePage_DirectorHomePage'>
 
                     <div className='Header' />
@@ -140,6 +144,8 @@ export default function DirectorHomePage() {
                     <Link to='/editdirectorpage'>
                         <Button className='btnEditProfile'>EDIT PROFILE</Button>
                     </Link>
+
+                    <Button className='adminPortal' onClick={admin}>ADMIN PORTAL</Button>
 
                     <span className='NAMEOFDIRECTOR'> {directorName} </span>
 
@@ -158,7 +164,9 @@ export default function DirectorHomePage() {
                         <button className="popupButton" onClick={changeStatus}>
                             Change status
                         </button>
-
+                        <button className="btnNavbar" onClick={openNav}>
+						    NAVIGATION
+				        </button>
                     </div>
 
                     <div style={{ height: 450, width: '1100px' }}>
@@ -187,10 +195,10 @@ export default function DirectorHomePage() {
                                 })
                             }}
                             sx={{
-                                top: '200px',
-								left: '40%',
+                                top: '250px',
                                 height: '600px',
-                                width: '88%',
+                                width: '1300px',
+                                left: '40%',
 								color: 'rgb(0, 0, 0)',
 								fontFamily: 'Montserrat',
 								fontSize: '20px',
@@ -204,8 +212,6 @@ export default function DirectorHomePage() {
 
                     </div>
                 </div>
-
-
 
                 <Container className="changeStatusPopUp" id="container" triggerText="Change Status" onSubmit={handleSubmit}
                     field_1={name}

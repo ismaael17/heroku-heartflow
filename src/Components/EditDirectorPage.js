@@ -3,6 +3,9 @@ import './EditDirectorPage.css'
 import { Link } from 'react-router-dom'
 import { Button } from "@material-ui/core";
 import VolunteersService from "../Services/volunteers.service";
+import {toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default class EditDirectorPage extends Component {
 
@@ -47,12 +50,12 @@ export default class EditDirectorPage extends Component {
 				this.state.number
 			).then(response => {
 				if (response.status === 200) {
-					alert("Successfully changed your details")
+					toast.success("Successfully changed your details")
 					form.submit()
 				} else if (response.status === 404) {
-					alert("Details could not be updated")
+					toast.error("Details could not be updated")
 				} else {
-					alert("Unknown error occured")
+					toast.error("Unknown error occured")
 				}
 			})
 			//RESPONSE
@@ -91,7 +94,7 @@ export default class EditDirectorPage extends Component {
 			<div className='EditDirectorPage_EditDirectorPage'>
 				
 				<span className='EDITPROFILE'>EDIT PROFILE</span>
-
+				<ToastContainer />
 				<div className='pnlMain' >
 					<span className='NAME'>NAME</span>
 					<span className='NUMBER'>PHONE NUMBER</span>
@@ -107,11 +110,12 @@ export default class EditDirectorPage extends Component {
 					</form>
 
 					<Button className='btnApply' onClick={this.submit}>CONFIRM</Button>
-
+					<Link to={{ pathname: "https://heartflow-support-system.herokuapp.com/reset_password" }} target="_blank">
+						<Button className='btnForgot'>
+							Forgot Password?
+						</Button>
+					</Link>
 				</div>
-
-
-
 
 				<Link to='/directorhomepage'>
 					<Button className='btnCancel' > CANCEL </Button>

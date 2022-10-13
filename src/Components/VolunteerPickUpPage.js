@@ -3,8 +3,10 @@ import './VolunteerPickUpPage.css'
 import { Link } from 'react-router-dom'
 import VolunteersService from "../Services/volunteers.service";
 import logo from '../public/HeartFlow_Logo_02.png'
-import AuthService from "../Services/auth.service";
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+// toast.configure()
 
 let locationList = []
 export default class VolunteerPickUpPage extends Component {
@@ -47,15 +49,14 @@ export default class VolunteerPickUpPage extends Component {
 				this.state.rangeEnd
 			).then(response => {
 				if (response.status === 200) {
-					alert("Succesfully logged the pickup from " + this.state.location)
-				} else if (response.status === 201) {
-					alert("Duplicate values have been picked up, this coupons will be flagged when used")
+					// toast.success("Successfully logged the pickup from" + this.state.location, {autoClose:3000})
+					alert("Successfully logged the pickup from " + this.state.location)
 				} else {
+					// toast.error("There has been an error", {autoClose:3000})
 					alert("There has been an error")
 				}
+				form.submit()
 			})
-			//RESPONSE
-			form.submit()
 		} else {
 			form.reportValidity()
 		}
@@ -120,16 +121,16 @@ export default class VolunteerPickUpPage extends Component {
 						<span className='NUMBEROFCOUPONS'>NUMBER OF COUPONS</span>
 						<span className='COUPONSPICKUP'>COUPONS PICK UP</span>
 
-
+						<ToastContainer />
 						<form id="pickupForm" action="http://localhost:3000/volunteerhomepage">
 							<input type='number' className='edtNrCoupon' onChange={this.onChangeCouponAmount} required={true} min={1} defaultValue={1} />
-							<select className='edtLocation' onChange={this.onChangeLocation} required={true} >
+							<select className='edtLocation' onChange={this.onChangeLocation} required={true}>
 								{locationList.map((location) => {
 									return <option value={location}>{location}</option>
 								})}
 								<option value="" disabled selected hidden>Choose a Location</option>
 							</select>
-							<input type='text' className='edtSerial' value={this.state.serialLetter} onChange={this.onChangeSerial} maxLength={1} required={true} />
+							<input type='text' className='edtSerial' value={this.state.serialLetter} onChange={this.onChangeSerial} maxLength={1} required={true} defaultValue={""}/>
 							<input type='number' className='edtStart' onChange={this.onChangeStart} required={true} defaultValue={1} min={1} />
 							<input type='number' className='edtEnd' value={this.state.rangeEnd} readOnly={true} />
 						</form>

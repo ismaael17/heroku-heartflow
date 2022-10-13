@@ -1,5 +1,5 @@
 
-.DirectorHomePage_DirectorHomePage {
+.DirectorHomePage_Deliveries {
 	position: relative;
 	left: 0px;
 	top: 0px;
@@ -10,7 +10,7 @@
 	background: rgb(255, 255, 255);
 }
 
-.DirectorHomePage_DirectorHomePage .btnLogout {
+.DirectorHomePage_Deliveries .btnLogout {
 	position: absolute;
 	right: 50px;
 	top: 47.5px;
@@ -26,35 +26,13 @@
 	font-weight: 500;
 }
 
-.DirectorHomePage_DirectorHomePage .btnLogout:hover {
+.DirectorHomePage_Deliveries .btnLogout:hover {
 	background: rgb(0, 225, 255);
 	transition: 0.25s;
 	transform: scale(1.05);
 }
 
-.DirectorHomePage_DirectorHomePage .adminPortal {
-	position: absolute;
-	right: 500px;
-	top: 47.5px;
-	width: 200px;
-	height: 55px;
-	background: rgba(255,255,255,1.00);
-	border-radius: 40px;
-	justify-content: center;
-	text-align: center;
-	color: rgba(0,0,0,1.00);
-	font-family: Montserrat;
-	font-size: 20px;
-	font-weight: 500;
-}
-
-.DirectorHomePage_DirectorHomePage .adminPortal:hover {
-	background: rgb(0, 225, 255);
-	transition: 0.25s;
-	transform: scale(1.05);
-}
-
-.DirectorHomePage_DirectorHomePage .btnEditProfile {
+.DirectorHomePage_Deliveries .btnEditProfile {
 	position: absolute;
 	right: 275px;
 	top: 47.5px;
@@ -70,61 +48,38 @@
 	font-weight: 500;
 }
 
-.DirectorHomePage_DirectorHomePage .btnEditProfile:hover {
+.DirectorHomePage_Deliveries .btnEditProfile:hover {
 	background: rgb(0, 225, 255);
 	transition: 0.25s;
 	transform: scale(1.05);
 }
 
-.DirectorHomePage_DirectorHomePage .btnAccept {
+
+.DirectorHomePage_Deliveries .adminPortal {
 	position: absolute;
-	left: 550px;
-	top: 720px;
-	width: 150px;
-	height: 50px;
+	right: 500px;
+	top: 47.5px;
+	width: 200px;
+	height: 55px;
+	background: rgba(255,255,255,1.00);
+	border-radius: 40px;
 	justify-content: center;
 	text-align: center;
+	color: rgba(0,0,0,1.00);
 	font-family: Montserrat;
-	color: rgba(255,255,255,1.00);
 	font-size: 20px;
 	font-weight: 500;
-	background: rgb(224, 64, 64);
-	color: rgb(255, 255, 255);
-	border: 0px;
-	border-radius: 40px;
 }
 
-.DirectorHomePage_DirectorHomePage .btnAccept:hover {
-	background: rgb(0, 0, 83);
+.DirectorHomePage_Deliveries .adminPortal:hover {
+	background: rgb(0, 225, 255);
 	transition: 0.25s;
 	transform: scale(1.05);
 }
 
-.DirectorHomePage_DirectorHomePage .btnReject {
-	position: absolute;
-	left: 725px;
-	top: 720px;
-	width: 150px;
-	height: 50px;
-	justify-content: center;
-	text-align: center;
-	font-family: Montserrat;
-	color: rgba(255,255,255,1.00);
-	font-size: 20px;
-	font-weight: 500;
-	background: rgb(224, 64, 64);
-	color: rgb(255, 255, 255);
-	border: 0px;
-	border-radius: 40px;
-}
 
-.DirectorHomePage_DirectorHomePage .btnReject:hover {
-	background: rgb(0, 0, 83);
-	transition: 0.25s;
-	transform: scale(1.05);
-}
 
-.DirectorHomePage_DirectorHomePage .NAMEOFDIRECTOR {
+.DirectorHomePage_Deliveries .NAMEOFDIRECTOR {
 	position: absolute;
 	left: 50px;
 	top: 45px;
@@ -140,7 +95,7 @@
 	line-height: 62.25px;
 }
 
-.DirectorHomePage_DirectorHomePage .Header {
+.DirectorHomePage_Deliveries .Header {
 	position: absolute;
 	top: 0;
 	margin-top: 0;
@@ -149,7 +104,7 @@
 	background: rgb(224, 64, 64);
 }
 
-.DirectorHomePage_DirectorHomePage .Footer {
+.DirectorHomePage_Deliveries .Footer {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
@@ -249,10 +204,10 @@
 	transform: scale(1.05);
 }
 
-.DirectorHomePage_DirectorHomePage .pnlTable {
+.DirectorHomePage_Deliveries .pnlTable {
 	position: absolute;
 	left: 50px;
-	top: -150px;
+	top: 0;
 	bottom: 0;
 	margin-top: auto;
 	margin-bottom: auto;
@@ -264,7 +219,7 @@
 	opacity: 0.9;
 }
 
-.DirectorHomePage_DirectorHomePage .TABLE {
+.DirectorHomePage_Deliveries .TABLE {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -285,7 +240,7 @@
 	z-index: 1;
 }
 
-.DirectorHomePage_DirectorHomePage .form_status {
+.DirectorHomePage_Deliveries .form_status {
 	position: absolute;
 	right: 50px;
 	top: 280px;
@@ -304,14 +259,14 @@
 	border: 0px;
 }
 
-.DirectorHomePage_DirectorHomePage .form_status:hover {
+.DirectorHomePage_Deliveries .form_status:hover {
 	background: rgb(0, 225, 255);
 	color: rgb(0, 0, 0);
 	transition: 0.25s;
 	transform: scale(1.05);
 }
 
-.DirectorHomePage_DirectorHomePage .popupButton {
+.DirectorHomePage_Deliveries .popupButton {
 	position: absolute;
 	right: 50px;
 	top: 370px;
@@ -330,14 +285,14 @@
 	border: 0px;
 }
 
-.DirectorHomePage_DirectorHomePage .popupButton:hover {
+.DirectorHomePage_Deliveries .popupButton:hover {
 	background: rgb(0, 225, 255);
 	color: rgb(0, 0, 0);
 	transition: 0.25s;
 	transform: scale(1.05);
 }
 
-.DirectorHomePage_DirectorHomePage .status {
+.DirectorHomePage_Deliveries .status {
 	position: absolute;
 	right: 50px;
 	top: 100px;
@@ -355,6 +310,7 @@
 	font-weight: 500;
 	border: 0px;
 }
+
 
 /* The side navigation menu */
 .sidenav {
@@ -408,10 +364,10 @@
   .sidenav a {font-size: 18px;}
 }
 
-.DirectorHomePage_DirectorHomePage .btnNavbar {
+.DirectorHomePage_Deliveries .btnNavbar {
 	position: absolute;
-	right: 50px;
-	top: 190px;
+	left: 10px;
+	top: 200px;
 	width: 200px;
 	height: 55px;
 	background: rgba(0, 0, 83);
@@ -425,5 +381,11 @@
 	font-size: 20px;
 	font-weight: 500;
 	border: 0px;
-	z-index: 1;
+}
+
+.DirectorHomePage_Deliveries .btnNavbar:hover {
+	background: rgb(0, 225, 255);
+	color: rgb(0, 0, 0);
+	transition: 0.25s;
+	transform: scale(1.05);
 }

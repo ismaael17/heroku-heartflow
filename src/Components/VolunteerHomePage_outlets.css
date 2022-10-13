@@ -1,5 +1,5 @@
 
-.VolunteerHomePage_VolunteerHomePage {
+.VolunteerHomePage_outlets {
 	position: relative;
 	left: 0px;
 	top: 0px;
@@ -10,7 +10,7 @@
 	background: rgba(255,255,255,1.00);
 }
 
-.VolunteerHomePage_VolunteerHomePage .logo {
+.VolunteerHomePage_outlets .logo {
 	position: absolute;
 	left: 0px;
 	top: 0px;
@@ -19,10 +19,9 @@
 	object-fit: cover;
 	overflow: hidden;
 	z-index: 0;
-
 }
 
-.VolunteerHomePage_VolunteerHomePage .pnlMain {
+.VolunteerHomePage_outlets .pnlMain {
 	position: absolute;
 	right: 50px;
 	top: 191px;
@@ -34,7 +33,7 @@
 	opacity: 0.9;
 }
 
-.VolunteerHomePage_VolunteerHomePage .ACTIONS {
+.VolunteerHomePage_outlets .ACTIONS {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -55,22 +54,22 @@
 	z-index: 1;
 }
 
-.VolunteerHomePage_VolunteerHomePage .pnlTable {
+.VolunteerHomePage_outlets .pnlTable {
 	position: absolute;
 	left: 50px;
-	top: 0;
+	top: -100px;
 	bottom: 0;
 	margin-top: auto;
 	margin-bottom: auto;
 	width: 300px;
-	height: 450px;
+	height: 300px;
 	background: rgba(255,255,255,1.00);
 	border-radius: 40px;
 	border: 1px solid rgb(0, 0, 0);
 	opacity: 0.9;
 }
 
-.VolunteerHomePage_VolunteerHomePage .TABLE {
+.VolunteerHomePage_outlets .TABLE {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -91,7 +90,7 @@
 	z-index: 1;
 }
 
-.VolunteerHomePage_VolunteerHomePage .emblem {
+.VolunteerHomePage_outlets .emblem {
 	position: fixed;
 	top: 148px;
 	left: 0;
@@ -105,7 +104,7 @@
 	resize: none;
 }
 
-.VolunteerHomePage_VolunteerHomePage .btnLogOut {
+.VolunteerHomePage_outlets .btnLogOut {
 	position: absolute;
 	right: 50px;
 	top: 47.5px;
@@ -124,13 +123,13 @@
 	border: 0px;
 }
 
-.VolunteerHomePage_VolunteerHomePage .btnLogOut:hover {
+.VolunteerHomePage_outlets .btnLogOut:hover {
 	background: rgb(0, 225, 255);
 	transition: 0.25s;
 	transform: scale(1.05);
 }
 
-.VolunteerHomePage_VolunteerHomePage .btnExchange {
+.VolunteerHomePage_outlets .btnExchange {
 	position: absolute;
 	right: 50px;
 	top: 350px;
@@ -149,14 +148,14 @@
 	border: 0px;
 }
 
-.VolunteerHomePage_VolunteerHomePage .btnExchange:hover {
+.VolunteerHomePage_outlets .btnExchange:hover {
 	background: rgb(0, 225, 255);
 	color: rgb(0, 0, 0);
 	transition: 0.25s;
 	transform: scale(1.05);
  }
 
-.VolunteerHomePage_VolunteerHomePage .btnDelivery {
+.VolunteerHomePage_outlets .btnDelivery {
 	position: absolute;
 	right: 50px;
 	top: 462.5px;
@@ -175,14 +174,14 @@
 	border: 0px;
 }
 
-.VolunteerHomePage_VolunteerHomePage .btnDelivery:hover {
+.VolunteerHomePage_outlets .btnDelivery:hover {
 	background: rgb(0, 225, 255);
 	color: rgb(0, 0, 0);
 	transition: 0.25s;
 	transform: scale(1.05);
  }
 
-.VolunteerHomePage_VolunteerHomePage .btnLoss {
+.VolunteerHomePage_outlets .btnLoss {
 	position: absolute;
 	right: 50px;
 	top: 237.5px;
@@ -201,14 +200,14 @@
 	border: 0px;
 }
 
-.VolunteerHomePage_VolunteerHomePage .btnLoss:hover {
+.VolunteerHomePage_outlets .btnLoss:hover {
 	background: rgb(0, 225, 255);
 	color: rgb(0, 0, 0);
 	transition: 0.25s;
 	transform: scale(1.05);
 }
 
-.VolunteerHomePage_VolunteerHomePage .btnRegister {
+.VolunteerHomePage_outlets .btnRegister {
 	position: absolute;
 	right: 50px;
 	top: 125px;
@@ -227,14 +226,14 @@
 	border: 0px;
 }
 
-.VolunteerHomePage_VolunteerHomePage .btnRegister:hover {
+.VolunteerHomePage_outlets .btnRegister:hover {
 	background: rgb(0, 225, 255);
 	color: rgb(0, 0, 0);
 	transition: 0.25s;
 	transform: scale(1.05);
 }
 
-.VolunteerHomePage_VolunteerHomePage .btnPickUp {
+.VolunteerHomePage_outlets .btnPickUp {
 	position: absolute;
 	right: 50px;
 	top: 575px;
@@ -253,43 +252,39 @@
 	border: 0px;
 }
 
-.VolunteerHomePage_VolunteerHomePage .btnPickUp:hover {
+.VolunteerHomePage_outlets .btnPickUp:hover {
 	background: rgb(0, 225, 255);
 	color: rgb(0, 0, 0);
 	transition: 0.25s;
 	transform: scale(1.05);
 }
 
-.VolunteerHomePage_VolunteerHomePage .btnNavbar {
+.VolunteerHomePage_outlets .btnOutletReg {
 	position: absolute;
-	right: 0;
-	left: 0;
-	margin-right: auto;
-	margin-left: auto;
-	top: 190px;
+	right: 500px;
+	top: 47.5px;
 	width: 200px;
 	height: 55px;
-	background: rgba(0, 0, 83);
+	background: rgba(255,255,255,1.00);
 	border-radius: 40px;
 	display: flex;
 	justify-content: center;
 	text-align: center;
 	align-items: center;
-	color: #FFFFFF;
+	color: rgba(0,0,0,1.00);
 	font-family: Montserrat;
 	font-size: 20px;
 	font-weight: 500;
 	border: 0px;
 }
 
- .btnNavbar:hover {
+.VolunteerHomePage_outlets .btnOutletReg:hover {
 	background: rgb(0, 225, 255);
-	color: rgb(0, 0, 0);
 	transition: 0.25s;
 	transform: scale(1.05);
 }
 
-.VolunteerHomePage_VolunteerHomePage .btnEditProf {
+.VolunteerHomePage_outlets .btnEditProf {
 	position: absolute;
 	right: 275px;
 	top: 47.5px;
@@ -308,39 +303,13 @@
 	border: 0px;
 }
 
-.VolunteerHomePage_VolunteerHomePage .btnEditProf:hover {
+.VolunteerHomePage_outlets .btnEditProf:hover {
 	background: rgb(0, 225, 255);
 	transition: 0.25s;
 	transform: scale(1.05);
 }
 
-.VolunteerHomePage_VolunteerHomePage .popupButton {
-	position: absolute;
-	right: 50px;
-	top: 370px;
-	width: 200px;
-	height: 55px;
-	background: rgba(0, 0, 83);
-	border-radius: 40px;
-	display: flex;
-	justify-content: center;
-	text-align: center;
-	align-items: center;
-	color: rgba(256, 256, 256);
-	font-family: Montserrat;
-	font-size: 20px;
-	font-weight: 500;
-	border: 0px;
-}
-
-.VolunteerHomePage_VolunteerHomePage .popupButton:hover {
-	background: rgb(0, 225, 255);
-	color: rgb(0, 0, 0);
-	transition: 0.25s;
-	transform: scale(1.05);
-}
-
-.VolunteerHomePage_VolunteerHomePage .status {
+.VolunteerHomePage_outlets .popupButton {
 	position: absolute;
 	right: 50px;
 	top: 100px;
@@ -359,14 +328,40 @@
 	border: 0px;
 }
 
-.VolunteerHomePage_VolunteerHomePage .status:hover {
+.VolunteerHomePage_outlets .popupButton:hover {
 	background: rgb(0, 225, 255);
 	color: rgb(0, 0, 0);
 	transition: 0.25s;
 	transform: scale(1.05);
 }
 
-.VolunteerHomePage_VolunteerHomePage .form_status {
+.VolunteerHomePage_outlets .status {
+	position: absolute;
+	right: 50px;
+	top: 100px;
+	width: 200px;
+	height: 55px;
+	background: rgba(0, 0, 83);
+	border-radius: 40px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	color: rgba(256, 256, 256);
+	font-family: Montserrat;
+	font-size: 20px;
+	font-weight: 500;
+	border: 0px;
+}
+
+.VolunteerHomePage_outlets .status:hover {
+	background: rgb(0, 225, 255);
+	color: rgb(0, 0, 0);
+	transition: 0.25s;
+	transform: scale(1.05);
+}
+
+.VolunteerHomePage_outlets .form_status {
 	position: absolute;
 	right: 50px;
 	top: 280px;
@@ -385,14 +380,14 @@
 	border: 0px;
 }
 
-.VolunteerHomePage_VolunteerHomePage .form_status:hover {
+.VolunteerHomePage_outlets .form_status:hover {
 	background: rgb(0, 225, 255);
 	color: rgb(0, 0, 0);
 	transition: 0.25s;
 	transform: scale(1.05);
 }
 
-.VolunteerHomePage_VolunteerHomePage .Header {
+.VolunteerHomePage_outlets .Header {
 	position: absolute;
 	top: 0;
 	margin-top: 0;
@@ -401,7 +396,7 @@
 	background: rgb(224, 64, 64);
 }
 
-.VolunteerHomePage_VolunteerHomePage .Footer {
+.VolunteerHomePage_outlets .Footer {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
@@ -409,7 +404,7 @@
 	background: rgb(0, 0, 83);
 }
 
-.VolunteerHomePage_VolunteerHomePage .CONTACT {
+.VolunteerHomePage_outlets .CONTACT {
 	position: absolute;
 	left: 30px;
 	top: 15px;
@@ -426,7 +421,7 @@
 	line-height: 31.125px;
 }
 
-.VolunteerHomePage_VolunteerHomePage .IG_logo {
+.VolunteerHomePage_outlets .IG_logo {
 	position: absolute;
 	top: 100px;
 	left: 30px;
@@ -436,12 +431,12 @@
 	resize: none;
 }
 
-.VolunteerHomePage_VolunteerHomePage .IG_logo:hover {
+.VolunteerHomePage_outlets .IG_logo:hover {
 	opacity: 0.5;
 	transition: 0.15s;
 }
 
-.VolunteerHomePage_VolunteerHomePage .FB_logo {
+.VolunteerHomePage_outlets .FB_logo {
 	position: absolute;
 	top: 100px;
 	left: 100px;
@@ -451,7 +446,7 @@
 	resize: none;
 }
 
-.VolunteerHomePage_VolunteerHomePage .FB_logo:hover {
+.VolunteerHomePage_outlets .FB_logo:hover {
 	opacity: 0.5;
 	transition: 0.15s;
 }
@@ -538,54 +533,31 @@
   margin-right: 17px;
 }
 
-/* The side navigation menu */
-.sidenav {
-  height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0;
-  background-color: rgba(0, 0, 83); /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-}
-
-/* The navigation menu links */
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
+.VolunteerHomePage_outlets .btnNavbar {
+	position: absolute;
+	right: 0;
+	left: 0;
+	margin-right: auto;
+	margin-left: auto;
+	top: 200px;
+	width: 200px;
+	height: 55px;
+	background: rgba(0, 0, 83);
+	border-radius: 40px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	color: #FFFFFF;
 	font-family: Montserrat;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
+	font-size: 20px;
+	font-weight: 500;
+	border: 0px;
 }
 
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-/* Position and style the close button (top right corner) */
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-	font-family: Montserrat;
-  margin-left: 50px;
-}
-
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#VolunteerHomePage_VolunteerHomePage {
-  transition: margin-left .5s;
-  padding: 20px;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+.VolunteerHomePage_outlets .btnNavbar:hover {
+	background: rgb(0, 225, 255);
+	color: rgb(0, 0, 0);
+	transition: 0.25s;
+	transform: scale(1.05);
 }

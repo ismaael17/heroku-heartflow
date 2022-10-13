@@ -7,7 +7,7 @@ export default function SignUpMessage () {
 	return (
 		<div className='SignUpMessage_SignUpMessage'>
 			<span className='YOURREQUESTHASBEENSENTPLEASEAWAITFORAPPROVALFROMOURDIRECTOR'>YOUR REQUEST HAS BEEN SENT!
-			<br/>PLEASE AWAIT FOR APPROVAL FROM OUR DIRECTOR.</span>
+			<br/>PLEASE AWAIT APPROVAL FROM OUR DIRECTOR.</span>
 
 			<Link to='/'>
 				<Button className='btnOk'>

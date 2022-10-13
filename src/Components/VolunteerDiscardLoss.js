@@ -3,6 +3,9 @@ import './VolunteerDiscardLoss.css'
 import { Link } from 'react-router-dom'
 import VolunteersService from "../Services/volunteers.service";
 import logo from '../public/HeartFlow_Logo_02.png'
+import {toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default class VolunteerDiscardLoss extends Component {
 	constructor(props) {
@@ -36,16 +39,18 @@ export default class VolunteerDiscardLoss extends Component {
 
 			).then(response => {
 				if (response.status === 200) {
+					// toast.success("Successfully logged the discarded coupons")
 					alert("Successfully logged the discarded coupons")
 				} else if (response.status === 201) {
-					console.log(response)
-					alert("This has been flagged as there is no record of this coupons")
+					// toast.warn("This has been flagged as there is no record of this coupons")
+					alert("This has been flagged as there is no record of this coupons, but has been logged")
 				} else {
+					// toast.error("Unknown database error")
 					alert("Unknown database error")
 				}
 			})
 			//RESPONSE
-			// form.submit()
+			form.submit()
 		} else {
 			form.reportValidity()
 		}
@@ -102,7 +107,7 @@ export default class VolunteerDiscardLoss extends Component {
 					<div className='Footer' />
 					<img className='logo' src={logo} alt="Heartflow logo"/>
 
-
+					<ToastContainer />
 					<div className='pnlMain'>
 						<span className='SERIALLETTER'>SERIAL LETTER</span>
 						<span className='RANGEEND'>RANGE END</span>

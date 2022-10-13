@@ -11,9 +11,11 @@
 }
 .EditDirectorPage_EditDirectorPage .EDITPROFILE {
 	position: absolute;
-	left: 49%;
-	top: 157.7px;
-	transform: translate(-50%, 0);
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	top: 75px;
 	width: 590.9599999999999px;
 	height: 50.629999999999995px;
 	display: flex;
@@ -73,7 +75,7 @@
 	right: 0;
 	margin-left: auto;
 	margin-right: auto;
-	top:630px;
+	top: 595px;
 	width: 200px;
 	height: 55px;
 	background: rgba(0, 0, 83);
@@ -96,31 +98,18 @@
 	transform: scale(1.05);
 }
 
-.EditDirectorPage_EditDirectorPage .APPLY {
-	position: absolute;
-	left: 1237.53px;
-	top: 41.5px;
-	width: 129.48px;
-	height: 28.22px;
-	display: flex;
-	justify-content: center;
-	text-align: center;
-	align-items: center;
-	color: rgba(0,0,0,1.00);
-	font-family: Montserrat;
-	font-size: 19.919999999999998px;
-	font-weight: 500;
-	line-height: 23.34375px;
-}
 .EditDirectorPage_EditDirectorPage .pnlMain {
 	position: absolute;
 	left: 0;
 	right: 0;
-	top: 110.39px;
+	top: 0;
+	bottom: 0;
+	margin-top: auto;
+	margin-bottom: auto;
 	width: 411.68px;
 	margin-left: auto;
 	margin-right: auto;
-	height: 700px;
+	height: 670px;
 	background: rgba(255,255,255,1.00);
 	border-radius: 49.8px;
 	border: 1px solid rgba(0,0,0,1);
@@ -268,7 +257,7 @@
 	right: 0;
 	margin-left: auto;
 	margin-right: auto;
-	top: 20px;
+	top: 30px;
 	width: 234.06px;
 	height: 24.9px;
 	display: flex;
@@ -360,4 +349,20 @@
 	font-size: 19.919999999999998px;
 	font-weight: 400;
 	line-height: 23.34375px;
+}
+
+ .EditDirectorPage_EditDirectorPage .btnForgot {
+	position: absolute;
+	top: 550px;
+	left: 22.5px;
+	width: 200px;
+	height: 28.22px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	color: rgb(0, 0, 0);
+	font-family: Montserrat;
+	font-size: 15px;
+	font-weight: 400;
 }

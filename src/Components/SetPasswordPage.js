@@ -5,6 +5,7 @@ import AuthService from "../Services/auth.service";
 import { useState } from "react";
 import logo from '../public/HeartFlow_Logo_02.png'
 import {Button} from "@material-ui/core";
+import emblem from '../public/HF_emblem.png'
 
 async function handleSubmit(password, token) {
 	console.log(password, token)
@@ -21,7 +22,7 @@ async function handleSubmit(password, token) {
 export default function SetPasswordPage() {
 	const location = useLocation()
 	const params = new URLSearchParams(location.search)
-	console.log(params.get("token"))
+	console.log(params.get("email"))
 	const [password, setPassword] = useState('');
 	function checkSame() {
 		var psw1 = document.getElementByiD('pswd1');
@@ -35,13 +36,18 @@ export default function SetPasswordPage() {
 
 		<div className='PasswordPage_PasswordPage'>
 			<img className='logo' src = {logo}/>
+			<div className='Header'/>
+			<div className='Footer'/>
+			<img className='emblem' src = {emblem}/>
 			<div className='pnlMain'>
 
 				<span className='SETPASSWORD'>CREATE A PASSWORD</span>
 				<span className='PASSWORD'>PASSWORD</span>
 				<span className='CONFIRM'>CONFIRM PASSWORD</span>
+				<span className='EMAIL'>EMAIL</span>
 
 				<form action='http://localhost:3000/loginpage' id="passForm">
+					<input type="email" readOnly={true} className="email" value={params.get("email")}/>
 					<input type="password" id="pswd1" name='psw1' className="edtPassword"/>
 					<input type="password" id="pswd2" name='psw2' required onchange="return checkSame()"
 						className="edtConfirm" onChange={event => setPassword(event.target.value)} />

@@ -140,7 +140,7 @@ export default class EditVolunteerProfile extends Component {
 					<span className='EMAIL'>EMAIL</span>
 					<span className='SURNAME'>SURNAME</span>
 
-					<form id='editVolunteerDetails' action="http://localhost:3000/volunteerhomepage">
+					<form id='editVolunteerDetails' action="https://heartflow-support-system.herokuapp.com/volunteerhomepage">
 						<input type='text' className='edtName' onChange={this.onChangeName} value={this.state.name} required={true} />
 						<input type='text' className='edtSurname' onChange={this.onChangeSurname} value={this.state.surname} required={true} />
 						<input type='text' className='edtEmail' value={this.state.email} onClick={this.info_email} readOnly={true} />

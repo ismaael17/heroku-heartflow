@@ -79,12 +79,10 @@ export default function DirectorHomePage() {
             localStorage.getItem("userToken"),
             table_status
         ).then(response => {
-            console.log(response.data)
-            console.log(response.data['length'])
+            setDataGridRows(dataGridRows => [])
             for (let i = 0; i < response.data['length']; i++) {
                 //Edit this data here
-                console.log("id is " + response.data[i]['id'])
-                setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'], firstName: response.data[i]['first_name'], lastName: response.data[i]['last_name'], date: response.data[i]['registerDate'], phone: response.data[i]['phone'], email: response.data[i]['email'], status: response.data[i]['status'] }])
+                setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'], firstName: response.data[i]['first_name'], lastName: response.data[i]['last_name'], age: '69', date: response.data[i]['registerDate'], phone: response.data[i]['phone'], email: response.data[i]['email'], status: response.data[i]['status'] }],)
             }
         })
     }
@@ -107,11 +105,9 @@ export default function DirectorHomePage() {
             localStorage.getItem("userToken"),
             "pending_review"
         ).then(response => {
-            console.log(response.data)
-            console.log(response.data['length'])
+            setDataGridRows(dataGridRows => [])
             for (let i = 0; i < response.data['length']; i++) {
-                console.log("id is " + response.data[i]['id'])
-                setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'], firstName: response.data[i]['first_name'], lastName: response.data[i]['last_name'],date: response.data[i]['registerDate'], phone: response.data[i]['phone'], email: response.data[i]['email'], status: response.data[i]['status'] }])
+                setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'], firstName: response.data[i]['first_name'], lastName: response.data[i]['last_name'], age: '69', date: response.data[i]['registerDate'], phone: response.data[i]['phone'], email: response.data[i]['email'], status: response.data[i]['status'] }],)
             }
         })
     }, [])
@@ -127,10 +123,10 @@ export default function DirectorHomePage() {
             <div>
                 <div id="mySidenav" className="sidenav">
 					<a href="javascript:void(0)" className="closebtn" onClick={closeNav}>&times;</a>
-                    <a href="http://localhost:3000/directorhomepage">Volunteers</a>
-					<a href="http://localhost:3000/directorhomepage_coupons">Online Coupons</a>
-					<a href="http://localhost:3000/directorhomepage_Deliveries">Deliveries</a>
-					<a href="http://localhost:3000/directorhomepage_outlets">Outlets</a>
+                    <a href="https://heartflow-support-system.herokuapp.com/directorhomepage">Volunteers</a>
+					<a href="https://heartflow-support-system.herokuapp.com/directorhomepage_coupons">Online Coupons</a>
+					<a href="https://heartflow-support-system.herokuapp.com/directorhomepage_Deliveries">Deliveries</a>
+					<a href="https://heartflow-support-system.herokuapp.com/directorhomepage_outlets">Outlets</a>
 				</div>
                 <div className='DirectorHomePage_DirectorHomePage'>
 
@@ -179,8 +175,7 @@ export default function DirectorHomePage() {
                             columns={columns}
                             pageSize={5}
                             rowsPerPageOptions={[5]}
-                            getRowId={(row) => row.id}
-                            
+                            // checkboxSelection
                             onSelectionModelChange={async (newSelection) => {
                                 setSelection(newSelection.selectionModel)
                                 globalNewSelection = newSelection
@@ -211,7 +206,7 @@ export default function DirectorHomePage() {
 								justifyContent: 'left',
 								textAlign: 'left',
 								borderRadius: '40px',
-								backgroundColor: 'rgb(13, 207, 240)',
+								backgroundColor: 'rgb(220, 220, 220)',
 								opacity: '0.98',
                             }} />
 

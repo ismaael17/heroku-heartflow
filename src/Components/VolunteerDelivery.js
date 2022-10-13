@@ -144,7 +144,7 @@ export default class VolunteerDelivery extends Component {
 						<span className='NUMBEROFCOUPONS'>NUMBER OF COUPONS</span>
 						<span className='COUPONSDELIVERY'>COUPONS DELIVERY</span>
 
-						<form id="deliveryForm" action="http://localhost:3000/volunteerhomepage">
+						<form id="deliveryForm" action="https://heartflow-support-system.herokuapp.com/volunteerhomepage">
 							<input type='number' className='edtNrCoupon' onChange={this.onChangeCouponAmount} required={true} min={1} defaultValue={1}/>
 							<input type='text' className='edtSerial' value={this.state.serialLetter} onChange={this.onChangeSerial} maxLength={1} required={true}/>
 							<select className='edtOutlet' onChange={this.onChangeOutlet} required={true}>

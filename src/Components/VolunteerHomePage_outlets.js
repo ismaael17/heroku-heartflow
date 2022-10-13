@@ -29,6 +29,7 @@ const columns: GridColDef[] = [
 	{ field: 'phone', headerName: 'Phone', width: 90 },
 	{ field: 'policy', headerName: 'Policy', width: 200 },
   	{ field: 'address', headerName: 'Address', width: 180 },
+	{ field: 'followUp', headerName: 'Follow Up', width: 150}
 ];
 
 function logout() {
@@ -46,7 +47,7 @@ export default function VolunteerHomePage_outlets() {
 		if (globalNewSelection === undefined) {
 			toast.info("Please select a company to edit.")
 		} else {
-			window.location.href = "http://localhost:3000/outletedit?id=" + globalNewSelection[0];
+			window.location.href = "https://heartflow-support-system.herokuapp.com/outletedit?id=" + globalNewSelection[0];
 		}
 	}
 
@@ -65,7 +66,7 @@ export default function VolunteerHomePage_outlets() {
 			setDataGridRows(dataGridRows => [])
 			for (let i = 0; i < response.data['length']; i++) {
 				//Edit this data here
-                setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'],  company :response.data[i]['companyName'], paymentMethod: response.data[i]['payment_method'], uptodate: response.data[i]['upToDate'] , repName: response.data[i]['repName'], email: response.data[i]['repEmail'], phone: response.data[i]['phone'], policy: response.data[i]['policy'], address: response.data[i]['address']}])
+                setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'],  company :response.data[i]['companyName'], paymentMethod: response.data[i]['payment_method'], uptodate: response.data[i]['upToDate'] , repName: response.data[i]['repName'], email: response.data[i]['repEmail'], phone: response.data[i]['phone'], policy: response.data[i]['policy'], address: response.data[i]['address'], followUp: response.data[i]['followUp']}])
             }
 		})
 	}, [])
@@ -79,9 +80,9 @@ export default function VolunteerHomePage_outlets() {
 			<div>
 				<div id="mySidenav" className="sidenav">
 					<a href="javascript:void(0)" className="closebtn" onClick={closeNav}>&times;</a>
-					<a href="http://localhost:3000/volunteerhomepage">Online Coupons</a>
-					<a href="http://localhost:3000/volunteerhomepage_Deliveries">Deliveries</a>
-					<a href="http://localhost:3000/volunteerhomepage_outlets">Outlets</a>
+					<a href="https://heartflow-support-system.herokuapp.com/volunteerhomepage">Online Coupons</a>
+					<a href="https://heartflow-support-system.herokuapp.com/volunteerhomepage_Deliveries">Deliveries</a>
+					<a href="https://heartflow-support-system.herokuapp.com/volunteerhomepage_outlets">Outlets</a>
 				</div>
 				<div className='VolunteerHomePage_outlets'>
 					<div className='Header'/>
@@ -117,7 +118,7 @@ export default function VolunteerHomePage_outlets() {
 								justifyContent: 'left',
 								textAlign: 'left',
 								borderRadius: '40px',
-								backgroundColor: 'rgb(13, 207, 240)',
+								backgroundColor: 'rgb(220, 220, 220)',
 								opacity: '0.98',
 							 }}/>
 					</div>

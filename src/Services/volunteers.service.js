@@ -13,6 +13,32 @@ class VolunteersService {
         })
     }
 
+    getDeliveries(token, paid) {
+        let paidStatus = ""
+        // eslint-disable-next-line default-case
+        switch (paid) {
+            case "All":
+                paidStatus = "All"
+                break
+            case "Paid":
+                paidStatus = "true"
+                break
+            case "Not Paid":
+                paidStatus = "false"
+                break
+            default:
+                paidStatus = "Director"
+        }
+
+
+        return axios.get(API_URL + "delivery/" + paidStatus, {
+            headers: {
+                Authorization: ('Token ' + token)
+            }}).then(response => {
+            return response
+        })
+    }
+
     async pickupCoupons(token, amount, source, serial_letter, range_from, range_to) {
 
         const postData = {
@@ -30,7 +56,6 @@ class VolunteersService {
         return await axios.post(API_URL + 'picked-up', postData, {
             headers: axiosConfig
         }).then(response => {
-            console.log(response)
             return(response)
         })
     }
@@ -45,7 +70,6 @@ class VolunteersService {
             reason: reason
         };
 
-        console.log("Range_to " + range_to)
 
         const axiosConfig = {
             'Authorization': 'Token ' + token
@@ -54,7 +78,6 @@ class VolunteersService {
         return await axios.post(API_URL + 'discard-coupons', postData, {
             headers: axiosConfig
         }).then(response => {
-            console.log(response)
             return (response)
         })
     }
@@ -70,8 +93,6 @@ class VolunteersService {
             to_volunteer :volunteerID
         };
 
-        console.log("Range_to " + range_to)
-        console.log(postData)
         const axiosConfig = {
             'Authorization': 'Token ' + token
         };
@@ -91,10 +112,8 @@ class VolunteersService {
             serial_letter: serial_letter,
             range_from: range_from,
             range_to: range_to,
-            outlet: outlet,
+            company: outlet,
         };
-
-        console.log("Range_to " + range_to)
 
         const axiosConfig = {
             'Authorization': 'Token ' + token
@@ -114,6 +133,18 @@ class VolunteersService {
         };
 
         return axios.get(API_URL + "register-company", {
+            headers:axiosConfig
+        }).then(response => {
+            return response
+        })
+    }
+
+    getOutlet(token, id) {
+        const axiosConfig = {
+                'Authorization': 'Token ' + token
+        };
+
+        return axios.get(API_URL + "register-company/" + id, {
             headers:axiosConfig
         }).then(response => {
             return response
@@ -162,6 +193,33 @@ class VolunteersService {
         })
     }
 
+    async changePaid(token, paid, id) {
+        let paidStatus = ""
+        // eslint-disable-next-line default-case
+        switch (paid) {
+            case "Paid":
+                paidStatus = "true"
+                break
+            case "Not Paid":
+                paidStatus = "false"
+                break
+        }
+        const postData = {
+            paid: paidStatus
+        };
+
+        const axiosConfig = {
+                'Authorization': 'Token ' + token
+        };
+
+        return await axios.patch(API_URL + "update-delivery/id=" + id, postData, {
+            headers:axiosConfig
+
+        }).then(response => {
+            return response
+        })
+    }
+
     getVolunteers(token) {
         const axiosConfig = {
                 'Authorization': 'Token ' + token
@@ -192,6 +250,32 @@ class VolunteersService {
             return response
         })
     }
+
+     async editOutlet(token, companyName, repName, email, phone, address, branch, payment, policy, active, id) {
+        const postData = {
+            companyName: companyName,
+            repName: repName,
+            repEmail: email,
+            phone: phone,
+            address: address,
+            branch: branch,
+            payment_method: payment,
+            policy: policy,
+            active: active
+        };
+
+        const axiosConfig = {
+            'Authorization': 'Token ' + token
+        };
+
+        return await axios.patch(API_URL + 'update-company/id=' + id, postData, {
+            headers: axiosConfig
+        }).then(response => {
+            return (response)
+        })
+    }
+
+
 
     editDirectorProfile(token, first_name, last_name, phone) {
         const postData = {
@@ -227,6 +311,16 @@ class VolunteersService {
 
     getOrderDetails(token, id) {
         return axios.get(API_URL + "coupon/id=" + id, {
+            headers: {
+                Authorization: ('Token ' + token)
+            }
+        }).then(response => {
+            return response
+        })
+    }
+
+    getDeliveryDetails(token, id) {
+        return axios.get(API_URL + "delivery/id=" + id, {
             headers: {
                 Authorization: ('Token ' + token)
             }

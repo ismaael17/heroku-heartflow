@@ -1,3 +1,6 @@
+from asyncio import exceptions
+import datetime
+from email import message
 import mimetypes
 from pathlib import Path
 from django.shortcuts import render
@@ -77,8 +80,8 @@ class volunteerInfo(APIView):
     permission_classes = (IsAuthenticated,)
 
     @csrf_exempt
-    def get(self, request, id = 0):
-        if (id == 0):
+    def get(self, request, id=0):
+        if id == 0:
             volunteer = request.user
             serializer = volunteerSerializer(volunteer)
         else:
@@ -110,7 +113,6 @@ class volunteerExchangeInfo(APIView):
         return Response(serializer.data, status=200)
 
 
-
 class pendingVolunteer(APIView):
     permission_classes = (IsAuthenticated,)
 
@@ -123,7 +125,7 @@ class pendingVolunteer(APIView):
 
                 volunteer.status = "approve"
                 token = encoded_reset_token(volunteer.id)
-                link = 'http://' + 'localhost:3000' + '/setpassword/' + "?token=" + token
+                link = 'http://' + 'localhost:3000' + '/setpassword/' + "?token=" + token + "&email=" + volunteer.email
                 html_context = {'url': link}
                 msg = EmailMultiRelated('Volunteer Request Approved!', 'Plain text version', 'Heartflow',
                                         [volunteer.email])
@@ -183,7 +185,7 @@ class pendingVolunteer(APIView):
                     subject='Meeting Scheduled',
                     message='Your meeting has been scheduled for ' + volunteer_data['date'] + '.',
                     from_email=settings.EMAIL_HOST_USER,
-                    recipient_list=[settings.RECIPIENT_ADDRESS]
+                    recipient_list=[volunteer.RECIPIENT_ADDRESS]
                 )
 
                 return HttpResponse(status=200)
@@ -197,7 +199,7 @@ class pendingVolunteer(APIView):
                     subject='Pending Review',
                     message='Your application is pending review',
                     from_email=settings.EMAIL_HOST_USER,
-                    recipient_list=[settings.RECIPIENT_ADDRESS]
+                    recipient_list=[volunteer.RECIPIENT_ADDRESS]
                 )
 
             elif status == 'inactive':
@@ -209,13 +211,12 @@ class pendingVolunteer(APIView):
                     subject='Inactive',
                     message='Your application is inactive',
                     from_email=settings.EMAIL_HOST_USER,
-                    recipient_list=[settings.RECIPIENT_ADDRESS]
+                    recipient_list=[volunteer.RECIPIENT_ADDRESS]
                 )
-
 
                 return HttpResponse(status=200)
 
-    def get(self, request, status = ""):
+    def get(self, request, status=""):
         if request.method == 'GET':
             if status == "":
                 volunteers = Volunteers.objects.all()
@@ -276,7 +277,7 @@ class registerCompany(APIView):
         if request.method == 'POST':
             company_data = JSONParser().parse(request)
             company_data['volunteer'] = request.user.id
-            company_data['branch'] = branch.objects.get(name=company_data['branch']).id
+            company_data['branch'] = request.user.branch.id
             if Companies.objects.filter(companyName=company_data['companyName']).exists():
                 return HttpResponse(status=400)
             serializer = companySerializer(data=company_data)
@@ -289,17 +290,73 @@ class registerCompany(APIView):
 
     def get(self, request, id=0):
         if request.method == 'GET':
-            if (id == 0):
+            if id == 0:
                 volunteer = request.user
                 companies = Companies.objects.filter(branch=volunteer.branch)
+                for i in range(0, len(companies)):
+                    volunteer_deliveries = delivery.objects.filter(company=companies[i].id)
+                    utd = True
+                    for j in range(0, len(volunteer_deliveries)):
+                        if volunteer_deliveries[j].paid == False:
+                            utd = False
+                            break
+                    companies[i].upToDate = utd
+                    companies[i].save()
+                
+                #check if we need to follow up on company
+                for i in range(0, len(companies)):
+                    try :
+                        deliveryy = delivery.objects.filter(company=companies[i].id)
+                        currentDelivery = deliveryy.latest('date')
+                        deliveryDate = currentDelivery.date.replace(tzinfo=None)
+                        today = datetime.datetime.now()
+                        policy = companies[i].policy
+                        companies[i].followUp = False
+                        if policy == "One week orders":
+                            if (today - deliveryDate).days >= 7:
+                                companies[i].followUp = True
+                        elif policy == "One month orders":
+                            if (today - deliveryDate).days >= 30:
+                                companies[i].followUp = True
+                        elif policy == "Six month orders":
+                            if (today - deliveryDate).days >= 180:
+                                companies[i].followUp = True
+                    except Exception as e :
+                        print(e)
+
+                        companies[i].followUp = False
+                        companies[i].save()
+                    companies[i].save()
                 serializer = companySerializer(companies, many=True)
                 return JsonResponse(serializer.data, safe=False)
             else:
                 company = Companies.objects.get(id=id)
+                
+                volunteer_deliveries = delivery.objects.filter(company=company.id)
+                utd = True
+                for j in range(0, len(volunteer_deliveries)):
+                    if volunteer_deliveries[j].paid == False:
+                        utd = False
+                        break
+                company.upToDate = utd
+                company.save()
+            
                 serializer = companySerializer(company)
                 return JsonResponse(serializer.data, safe=False)
-            
 
+
+class updateCompany(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def patch(self, request, id=0):
+        if request.method == 'PATCH':
+            company_data = JSONParser().parse(request)
+            company = Companies.objects.get(id=id)
+            serializer = companySerializer(company, data=company_data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+            return Response(serializer.data, status=200)
+        return Response(serializer.errors, status=400)
 
 
 class discardLost(APIView):
@@ -314,10 +371,11 @@ class discardLost(APIView):
             flag_reason = ""
 
             if (
-            not (((volunteerCoupons.objects.filter(volunteer=volunteer, serial_letter=discardLost_data['serial_letter'],
-                                                   range_from__lte=discardLost_data['range_from'],
-                                                   range_to__gte=discardLost_data['range_to'])).exists())
-            )):
+                    not (((volunteerCoupons.objects.filter(volunteer=volunteer,
+                                                           serial_letter=discardLost_data['serial_letter'],
+                                                           range_from__lte=discardLost_data['range_from'],
+                                                           range_to__gte=discardLost_data['range_to'])).exists())
+                    )):
                 flag = True
                 flag_reason = "Volunteer does not have the coupons"
                 print("flag is true")
@@ -332,7 +390,7 @@ class discardLost(APIView):
 
             discardLost_data['flag'] = flag
             volunteer.couponAmount = volunteer.couponAmount - int(discardLost_data['amount'])
-            if (not flag):
+            if not flag:
                 coupons = volunteerCoupons.objects.filter(volunteer=volunteer,
                                                           serial_letter=discardLost_data['serial_letter'],
                                                           range_from__lte=discardLost_data['range_from'],
@@ -352,12 +410,12 @@ class discardLost(APIView):
                             coupon.save()
                             break
                         else:
-                            newCoupon = volunteerCouponSerializer.objects(volunteer=volunteer,
-                                                                                 serial_letter=discardLost_data[
-                                                                                     'serial_letter'],
-                                                                                 range_from=coupon.range_from,
-                                                                                 range_to=discardLost_data[
-                                                                                              'range_from'] - 1)
+                            newCoupon = volunteerCoupons(volunteer=volunteer,
+                                                                          serial_letter=discardLost_data[
+                                                                              'serial_letter'],
+                                                                          range_from=coupon.range_from,
+                                                                          range_to=discardLost_data[
+                                                                                       'range_from'] - 1)
                             newCoupon.save()
                             coupon.range_from = discardLost_data['range_to'] + 1
                             coupon.save()
@@ -393,6 +451,46 @@ class discardLost(APIView):
             return JsonResponse(serializer.data, safe=False)
 
 
+class deliveries(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    @csrf_exempt
+    def get(self, request, paid="", id=0):
+        if request.method == 'GET':
+            if paid != "":
+                companyBranch = Companies.objects.filter(branch=request.user.branch)
+                if paid == "true":
+                    delivery_obj = delivery.objects.filter(paid=True).filter(company__in=companyBranch)
+                elif paid == "false":
+                    delivery_obj = delivery.objects.filter(paid=False).filter(company__in=companyBranch)
+                elif paid == "All":
+                    delivery_obj = delivery.objects.filter(company__in=companyBranch)
+                else:
+                    delivery_obj = delivery.objects
+                delivery_serializer = deliverySerializer(delivery_obj, many=True)
+                return JsonResponse(delivery_serializer.data, safe=False)
+            elif id != 0:
+                print(id)
+                delivery_obj = delivery.objects.get(id=id)
+                delivery_serializer = deliverySerializer(delivery_obj)
+                return JsonResponse(delivery_serializer.data, safe=False)
+
+
+class updateDeliveries(APIView):
+    @csrf_exempt
+    def patch (self, request, id=0):
+        if request.method == 'PATCH':
+            delivery_data = JSONParser().parse(request)
+            delivery_obj = delivery.objects.get(id=id)
+            if delivery_data['paid'] == "true":
+                paid = True
+            else:
+                paid = False
+            delivery_obj.paid = paid
+            delivery_obj.save()
+            return HttpResponse(status=200)
+
+
 class coupons(APIView):
     permission_classes = (IsAuthenticated,)
 
@@ -400,7 +498,10 @@ class coupons(APIView):
     def get(self, request, status="", id=0):
         if request.method == 'GET':
             if status != "":
-                coupons = OnlineCoupons.objects.filter(status=status).filter(branch=request.user.branch.name)
+                if status == "All":
+                    coupons = OnlineCoupons.objects
+                else:
+                    coupons = OnlineCoupons.objects.filter(status=status).filter(branch=request.user.branch.name)
                 coupon_serializer = transactionsSerializer(coupons, many=True)
                 return JsonResponse(coupon_serializer.data, safe=False)
             elif id != 0:
@@ -440,10 +541,12 @@ class exchange(APIView):
             # check if valid exchange
 
             if (
-            not (((volunteerCoupons.objects.filter(volunteer=volunteer, serial_letter=exchange_data['serial_letter'],
-                                                   range_from__lte=exchange_data['range_from'],
-                                                   range_to__gte=exchange_data['range_to'])).exists())
-            )):
+                    not (
+                            ((volunteerCoupons.objects.filter(volunteer=volunteer,
+                                                              serial_letter=exchange_data['serial_letter'],
+                                                              range_from__lte=exchange_data['range_from'],
+                                                              range_to__gte=exchange_data['range_to'])).exists())
+                    )):
                 flag = True
                 flag_reason = "Volunteer does not have the coupons"
                 print("flag is true")
@@ -467,19 +570,19 @@ class exchange(APIView):
                             coupon.save()
                             break
                         else:
-                            newCoupon = volunteerCoupons.objects(volunteer=volunteer,
-                                                                        serial_letter=exchange_data['serial_letter'],
-                                                                        range_from=coupon.range_from,
-                                                                        range_to=exchange_data['range_from'] - 1)
+                            newCoupon = volunteerCoupons(volunteer=volunteer,
+                                                                 serial_letter=exchange_data['serial_letter'],
+                                                                 range_from=coupon.range_from,
+                                                                 range_to=exchange_data['range_from'] - 1)
                             newCoupon.save()
                             coupon.range_from = exchange_data['range_to'] + 1
                             coupon.save()
                             break
 
                 couponsTo = volunteerCoupons(volunteer=exchange_data["volunteer_to"],
-                                                    serial_letter=exchange_data['serial_letter'],
-                                                    range_from=exchange_data['range_from'],
-                                                    range_to=exchange_data['range_to'])
+                                             serial_letter=exchange_data['serial_letter'],
+                                             range_from=exchange_data['range_from'],
+                                             range_to=exchange_data['range_to'])
                 couponsTo.save()
 
             exchange_data['from_volunteer'] = volunteer.id
@@ -501,13 +604,78 @@ class deliver(APIView):
 
     def post(self, request):
         if request.method == 'POST':
+            # TODO Fill in the rest of the fields like Payment Method
             deliver_data = JSONParser().parse(request)
+            delivery_company = Companies.objects.get(id=deliver_data['company'])
+            deliver_data["payment_method"] = delivery_company.payment_method
             volunteer = request.user
             deliver_data['volunteer'] = volunteer.id
+            flag_reasom = ""
+            flag = False
+            if (not (((volunteerCoupons.objects.filter(volunteer=volunteer,
+                                                        serial_letter=deliver_data['serial_letter'],
+                                                        range_from__lte=deliver_data['range_from'],
+                                                        range_to__gte=deliver_data['range_to'])).exists()))):
+                        flag = True
+                        flag_reason = "Volunteer does not have the coupons"
+
+            if (not flag):
+                coupons = volunteerCoupons.objects.filter(volunteer=volunteer,
+                                                          serial_letter=deliver_data['serial_letter'],
+                                                          range_from__lte=deliver_data['range_from'],
+                                                          range_to__gte=deliver_data['range_to'])
+                for coupon in coupons:
+                    if (coupon.range_from == deliver_data['range_from'] and coupon.range_to == deliver_data[
+                        'range_to'] and coupons.count() == 1):
+                        coupon.delete()
+                        break
+                    else:
+                        if (coupon.range_from == deliver_data['range_from']):
+                            coupon.range_from = str (int (deliver_data['range_to']) + 1)
+                            coupon.save()
+                            break
+                        elif (coupon.range_to == deliver_data['range_to']):
+                            coupon.range_to = str( int (deliver_data['range_from']) - 1)
+                            coupon.save()
+                            break
+                        else:
+                            newCoupon = volunteerCoupons(volunteer=volunteer,
+                                                        amount = deliver_data['amount'],
+                                                        serial_letter=deliver_data['serial_letter'],
+                                                        range_from=coupon.range_from,
+                                                        range_to= str (int (deliver_data['range_from']) - 1))
+                            newCoupon.save()
+                            coupon.range_from = str (int (deliver_data['range_to']) + 1)
+                            coupon.save()
+                            break
+
+            deliver_data['flag'] = flag
             serializer = deliverySerializer(data=deliver_data)
             if serializer.is_valid():
+                if (flag):
+                    status = 201
+                else:
+                    status = 200
+                if (deliver_data["payment_method"] == "Cash at later time" or deliver_data["payment_method"] == "Eft at later time"):
+                    message='Amount of coupons delivered: ' + str(int (deliver_data['range_to']) - int(deliver_data['range_from']) + 1) + '\n' + 'Serial Letter: ' + deliver_data['serial_letter'] + '\n' + 'Delivery Company: ' + delivery_company.companyName + '\n' + 'Please transfer ZAR: ' + str(int(deliver_data['amount']) * 10) + ' to the following account: ' + '\n' + 'Account Number: 123456789' + '\n' + 'Account Name: Coupon Delivery' + '\n' + 'Bank: Standard Bank' + '\n' + 'Branch Code: 123456' + '\n'
+
+                else :
+                    message = 'Amount of coupons delivered: ' + str(int (deliver_data['range_to']) - int(deliver_data['range_from']) + 1) + '\n' + 'Serial Letter: ' + deliver_data['serial_letter'] + '\n' + 'Delivery Company: ' + delivery_company.companyName + '\n' + 'Paid ZAR: ' + str(int(deliver_data['amount']) * 10) 
+                #send receipt to company
+                send_mail(
+                    subject='Delivery Receipt',
+                    message=message,
+                    from_email=settings.EMAIL_HOST_USER,
+                    recipient_list=[delivery_company.repEmail],
+                )
+                
+                    
+                
                 serializer.save()
-                return HttpResponse(status=200)
+                if flag:
+                    return HttpResponse({"flag_reason": flag_reason}, status=status)
+                else:
+                    return HttpResponse(status=status)
 
             print(serializer.errors)
             return HttpResponse(status=400)
@@ -573,6 +741,8 @@ class sources(APIView):
 
             print(serializer.errors)
             return HttpResponse(status=400)
+
+
 
 
 class EmailMultiRelated(EmailMultiAlternatives):

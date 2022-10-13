@@ -28,14 +28,10 @@ class AuthService {
     async getPendingVolunteers(token, status) {
         return await axios.get(API_URL + 'pending-volunteers/' + status,  {headers: {
             Authorization: ('Token ' + token)
-        }}).then(response => {
-            console.log(response)
-            return response
-        })
+        }})
     }
 
     async changeStatus(token, id, status, date) {
-        console.log(date)
         var postData = {
             id: id,
             date: date

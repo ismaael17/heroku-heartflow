@@ -119,7 +119,7 @@ export default class VolunteerDiscardLoss extends Component {
 						<span className='REASONFORDISCARD'>REASON FOR DISCARD</span>
 						<span className='COUPONSDISCARDLOST'>COUPONS DISCARD/LOST</span>
 
-						<form id="discardlostForm" action="http://localhost:3000/volunteerhomepage">
+						<form id="discardlostForm" action="https://heartflow-support-system.herokuapp.com/volunteerhomepage">
 							<input type='number' className='edtNrCoupon' onChange={this.onChangeCouponAmount} required={true} min={1} defaultValue={1} />
 							<input type='text' className='edtSerial' value={this.state.serialLetter} onChange={this.onChangeSerial} maxLength={1} required={true} />
 							<input type='number' className='edtStart' onChange={this.onChangeStart} required={true} defaultValue={1} min={1} />

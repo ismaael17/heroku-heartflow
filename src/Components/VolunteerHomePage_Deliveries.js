@@ -20,8 +20,8 @@ const columns: GridColDef[] = [
   { field: 'company', headerName: 'Company', width: 150 },
   { field: 'paymentMethod', headerName: 'Payment Method', width: 150 },
   { field: 'amount', headerName: 'No. of Coupons', width: 180 },
-  { field: 'paid', headerName: 'Paid', width: 200 },
-  { field: 'date', headerName: 'Date', width: 90 },
+  { field: 'paid', headerName: 'Paid', width: 100 },
+  { field: 'date', headerName: 'Date', width: 300 },
   { field: 'comments', headerName: 'Comment', width: 180 },
 ];
 
@@ -110,9 +110,9 @@ export default function VolunteerHomePage_Deliveries() {
 			<div>
 				<div id="mySidenav" className="sidenav">
 					<a href="javascript:void(0)" className="closebtn" onClick={closeNav}>&times;</a>
-					<a href="http://localhost:3000/volunteerhomepage">Online Coupons</a>
-					<a href="http://localhost:3000/volunteerhomepage_Deliveries">Deliveries</a>
-					<a href="http://localhost:3000/volunteerhomepage_outlets">Outlets</a>
+					<a href="https://heartflow-support-system.herokuapp.com/volunteerhomepage">Online Coupons</a>
+					<a href="https://heartflow-support-system.herokuapp.com/volunteerhomepage_Deliveries">Deliveries</a>
+					<a href="https://heartflow-support-system.herokuapp.com/volunteerhomepage_outlets">Outlets</a>
 				</div>
 				<div className='VolunteerHomePage_Deliveries'>
 					<div className='Header'/>
@@ -133,7 +133,7 @@ export default function VolunteerHomePage_Deliveries() {
 						<DataGrid
 							rows={dataGridRows}
 							columns={columns}
-							pageSize={5}
+							pageSize={11}
 							rowsPerPageOptions={[5]}
 							onSelectionModelChange={async (newSelection) => {
 								setSelection(newSelection.selectionModel)
@@ -154,7 +154,7 @@ export default function VolunteerHomePage_Deliveries() {
 								justifyContent: 'left',
 								textAlign: 'left',
 								borderRadius: '40px',
-								backgroundColor: 'rgb(13, 207, 240)',
+								backgroundColor: 'rgb(220, 220, 220)',
 								opacity: '0.98',
 							 }}/>
 					</div>

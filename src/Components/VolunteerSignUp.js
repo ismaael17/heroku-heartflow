@@ -120,7 +120,7 @@ export default class VolunteerSignUp extends Component {
 			form.reportValidity()
 		}
 		if (success) {
-			form.action = "http://localhost:3000/SignUpMessage"
+			form.action = "https://heartflow-support-system.herokuapp.com/SignUpMessage"
 			document.body.appendChild(form)
 			form.submit()
 		}

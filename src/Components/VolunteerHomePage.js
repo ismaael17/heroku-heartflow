@@ -61,7 +61,6 @@ export default function VolunteerHomePage() {
 			setDataGridRows(dataGridRows => [])
 			for (let i = 0; i < response.data['length']; i++) {
 				//Edit this data here
-				console.log("id is " + response.data[i]['id'])
 				setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'], firstName: response.data[i]['name'], lastName: response.data[i]['surname'], coupons: response.data[i]['amount'], branch: response.data[i]['branch'], paid: response.data[i]['paid'], status: response.data[i]['status'] }])
 			}
 		})
@@ -104,7 +103,6 @@ export default function VolunteerHomePage() {
 			setDataGridRows(dataGridRows => [])
 			for (let i = 0; i < response.data['length']; i++) {
 				//Edit this data here
-				console.log("id is " + response.data[i]['id'])
 				setDataGridRows(dataGridRows => [...dataGridRows, { id: response.data[i]['id'], firstName: response.data[i]['name'], lastName: response.data[i]['surname'], coupons: response.data[i]['amount'], branch: response.data[i]['branch'], paid: response.data[i]['paid'], status: response.data[i]['status'] }])
 			}
 		})
@@ -119,9 +117,9 @@ export default function VolunteerHomePage() {
 			<div>
 				<div id="mySidenav" className="sidenav">
 					<a href="javascript:void(0)" className="closebtn" onClick={closeNav}>&times;</a>
-					<a href="http://localhost:3000/volunteerhomepage">Online Coupons</a>
-					<a href="http://localhost:3000/volunteerhomepage_Deliveries">Deliveries</a>
-					<a href="http://localhost:3000/volunteerhomepage_outlets">Outlets</a>
+					<a href="https://heartflow-support-system.herokuapp.com/volunteerhomepage">Online Coupons</a>
+					<a href="https://heartflow-support-system.herokuapp.com/volunteerhomepage_Deliveries">Deliveries</a>
+					<a href="https://heartflow-support-system.herokuapp.com/volunteerhomepage_outlets">Outlets</a>
 				</div>
 				<div className='VolunteerHomePage_VolunteerHomePage'>
 					<div className='Header' />
@@ -173,7 +171,7 @@ export default function VolunteerHomePage() {
 								justifyContent: 'left',
 								textAlign: 'left',
 								borderRadius: '40px',
-								backgroundColor: 'rgb(13, 207, 240)',
+								backgroundColor: 'rgb(220, 220, 220)',
 								opacity: '0.98',
 							}} />
 					</div>

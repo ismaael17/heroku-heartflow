@@ -44,8 +44,8 @@ export default class CouponBuyPage extends Component {
 			branch: '',
 			signature: '',
 			email: '',
-			returnURL: 'http://localhost:3000/couponbuymessage',
-			cancelURL: 'http://localhost:3000/paymentfailedmessage?',
+			returnURL: 'https://heartflow-support-system.herokuapp.com/couponbuymessage',
+			cancelURL: 'https://heartflow-support-system.herokuapp.com/paymentfailedmessage?',
 		};
 
 		AuthService.getBranches(
@@ -70,11 +70,11 @@ export default class CouponBuyPage extends Component {
 			let signatureString = ''
 
 
-			const returnUrl = "http://localhost:3000/couponbuymessage"
-			let cancelUrl = "http://localhost:3000/paymentfailedmessage?ref=" + params
+			const returnUrl = "https://heartflow-support-system.herokuapp.com/couponbuymessage"
+			let cancelUrl = "https://heartflow-support-system.herokuapp.com/paymentfailedmessage?ref=" + params
 			const descript = "You are buying " + ((this.state.coupons) * 10) + " coupons from the " + (this.state.branch) + " branch."
 			console.log(cancelUrl)
-			await PayfastSecurity.getSignature("10027098", "eg5a9b4ysxts2", "http://localhost:3000/couponbuymessage",
+			await PayfastSecurity.getSignature("10027098", "eg5a9b4ysxts2", "https://heartflow-support-system.herokuapp.com/couponbuymessage",
 				cancelUrl, "https://2058-146-232-65-121.eu.ngrok.io/notificationPage", params, paying, "Heartflow Coupons",
 				this.state.name, this.state.surname, this.state.email, descript).then(response => {
 					signatureString = response
@@ -89,9 +89,9 @@ export default class CouponBuyPage extends Component {
 			//TODO Add error catching here
 			payfastForm.innerHTML = `<input type="hidden" name="merchant_id" value="10027098"/>` +
 				`<input type="hidden" name="merchant_key" value="eg5a9b4ysxts2"/>` +
-				`<input type="hidden" name="return_url" value="http://localhost:3000/couponbuymessage"/>` +
+				`<input type="hidden" name="return_url" value="https://heartflow-support-system.herokuapp.com/couponbuymessage"/>` +
 				`<input type="hidden" name="cancel_url" value=${cancelUrl}>` +
-				`<input type="hidden" name="notify_url" value="https://356f-146-232-65-175.eu.ngrok.io/notificationPage"/>` +
+				`<input type="hidden" name="notify_url" value="https://229b-146-232-65-146.eu.ngrok.io/notificationPage"/>` +
 				`<input type="hidden" name="name_first" value=${this.state.name}>` +
 				`<input type="hidden" name="name_last" value=${this.state.surname}>` +
 				`<input type="hidden" name="email_address" value=${this.state.email}>` +

@@ -101,7 +101,7 @@ export default class EditDirectorPage extends Component {
 					<span className='EMAIL'>EMAIL</span>
 					<span className='SURNAME'>SURNAME</span>
 
-					<form id='editDirectorProfile' action="http://localhost:3000/directorhomepage">
+					<form id='editDirectorProfile' action="https://heartflow-support-system.herokuapp.com/directorhomepage">
 						<input type='text' className='edtName' onChange={this.onChangeName} value={this.state.name} required={true} />
 						<input type='text' className='edtSurname' onChange={this.onChangeSurname} value={this.state.surname} required={true} />
 						<input type='text' className='edtEmail' value={this.state.email} readOnly={true} />

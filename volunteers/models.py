@@ -15,12 +15,12 @@ class Volunteers(AbstractUser):
     username = None
     groups = None
     email = models.EmailField(_('email address'), unique=True)
-    branch = models.ForeignKey("branch", on_delete=models.CASCADE, null=True)
+    branch = models.ForeignKey("branch", on_delete=models.CASCADE, null=False, default=1)
     couponAmount = models.IntegerField(default=0)
     status = models.CharField(max_length=30, default="pending_review")
     reason = models.TextField(default="", blank=True)
     registerDate = models.DateField(auto_now_add=True)
-    phone = models.CharField(max_length=20, default="", null=True)
+    phone = models.CharField(max_length=20, default="", null=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -62,7 +62,7 @@ class Companies(models.Model):
     repName = models.CharField(max_length=255, null=False)
     repEmail = models.CharField(max_length=255, null=False)
     address = models.CharField(max_length=255, null=False)
-    branch = models.ForeignKey("branch", on_delete=models.CASCADE, null=False)
+    branch = models.ForeignKey("branch", on_delete=models.CASCADE, null=False, default=1)
     upToDate = models.BooleanField(default=False)
     payment_method = models.CharField(max_length=255, null=False)
     policy = models.CharField(max_length=255, null=False)
@@ -70,6 +70,7 @@ class Companies(models.Model):
     policy = models.CharField(max_length=255, null=False, default="None")
     phone = models.CharField(max_length=20, default="", null=False)
     active = models.BooleanField(default=True)
+    followUp = models.BooleanField(default=False)
 
 class exchanges(models.Model):
     amount = models.IntegerField(null=False)
@@ -104,7 +105,7 @@ class delivery(models.Model):
     paymentMethod = models.CharField(max_length=255, null=False, default="None")
     flag = models.BooleanField(default=False)
     paid = models.BooleanField(default=False)
-    company = models.ForeignKey("Companies", on_delete=models.CASCADE)
+    company = models.ForeignKey("Companies", on_delete=models.CASCADE, default=1)
     payment_method = models.CharField(max_length=255, null=False, default="None")
 
 

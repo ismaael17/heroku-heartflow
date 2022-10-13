@@ -142,7 +142,7 @@ export default class VolunteerExchange extends React.Component {
 						<span className='RANGEEND'>RANGE END</span>
 
 
-						<form id="exchangeForm" action="http://localhost:3000/volunteerhomepage">
+						<form id="exchangeForm" action="https://heartflow-support-system.herokuapp.com/volunteerhomepage">
 							<input type='number' className='edtNrCoupon' onChange={this.onChangeCouponAmount} required={true} min={1}/>
 							<input type='text' className='serialLetter' onChange={this.onChangeSerial} required={true} maxLength={1} value={this.state.serialLetter}/>
 

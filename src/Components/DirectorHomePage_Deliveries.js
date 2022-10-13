@@ -71,10 +71,10 @@ export default function DirectorHomePage_Deliveries() {
             <div>
                 <div id="mySidenav" className="sidenav">
 					<a href="javascript:void(0)" className="closebtn" onClick={closeNav}>&times;</a>
-                    <a href="http://localhost:3000/directorhomepage">Volunteers</a>
-					<a href="http://localhost:3000/directorhomepage_coupons">Online Coupons</a>
-					<a href="http://localhost:3000/directorhomepage_Deliveries">Deliveries</a>
-					<a href="http://localhost:3000/directorhomepage_outlets">Outlets</a>
+                    <a href="https://heartflow-support-system.herokuapp.com/directorhomepage">Volunteers</a>
+					<a href="https://heartflow-support-system.herokuapp.com/directorhomepage_coupons">Online Coupons</a>
+					<a href="https://heartflow-support-system.herokuapp.com/directorhomepage_Deliveries">Deliveries</a>
+					<a href="https://heartflow-support-system.herokuapp.com/directorhomepage_outlets">Outlets</a>
 				</div>
                 <div className='DirectorHomePage_Deliveries'>
 
@@ -116,7 +116,7 @@ export default function DirectorHomePage_Deliveries() {
 								justifyContent: 'left',
 								textAlign: 'left',
 								borderRadius: '40px',
-								backgroundColor: 'rgb(13, 207, 240)',
+								backgroundColor: 'rgb(220, 220, 220)',
 								opacity: '0.98',
                             }} />
 

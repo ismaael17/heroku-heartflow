@@ -207,7 +207,7 @@ export default class OutletEdit extends Component {
 						<span className='OUTLETDETAILS'>OUTLET DETAILS</span>
 						<span className='OUTLETNAME'>OUTLET NAME</span>
 
-					<form id="outleteditForm" action="http://localhost:3000/volunteerhomepage">
+					<form id="outleteditForm" action="https://heartflow-support-system.herokuapp.com/volunteerhomepage">
 						<input type='text' className='edtOutName' onChange={this.onChangeOutlet} value={this.state.outlet} required={true} maxLength={50}/>
 						<input type='text' className='edtRepName' onChange={this.onChangeRep} required={true} value={this.state.rep} maxLength={50}/>
 						<input type='email' className='edtRepEmail' onChange={this.onChangeEmail} value={this.state.email} required={true}/>

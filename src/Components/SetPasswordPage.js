@@ -46,7 +46,7 @@ export default function SetPasswordPage() {
 				<span className='CONFIRM'>CONFIRM PASSWORD</span>
 				<span className='EMAIL'>EMAIL</span>
 
-				<form action='http://localhost:3000/loginpage' id="passForm">
+				<form action='https://heartflow-support-system.herokuapp.com/loginpage' id="passForm">
 					<input type="email" readOnly={true} className="email" value={params.get("email")}/>
 					<input type="password" id="pswd1" name='psw1' className="edtPassword"/>
 					<input type="password" id="pswd2" name='psw2' required onchange="return checkSame()"

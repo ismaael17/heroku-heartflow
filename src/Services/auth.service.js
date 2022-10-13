@@ -1,4 +1,6 @@
 import axios from 'axios';
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
 
 const API_URL = 'https://heartflow-support-system.herokuapp.com/'
 

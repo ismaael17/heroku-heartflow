@@ -43,7 +43,7 @@ class AuthService {
                 'Authorization': 'Token ' + token
         };
 
-        return await axios.patch(API_URL + 'pending-volunteers/' + status + '/', postData, {
+        return await axios.patch(API_URL + 'patch-pending-volunteers/' + status + '/', postData, {
             headers : axiosConfig
         }).then(response => {
             console.log(response)

@@ -115,6 +115,20 @@ class volunteerExchangeInfo(APIView):
 
 class pendingVolunteer(APIView):
     permission_classes = (IsAuthenticated,)
+    @csrf_exempt
+    def get(self, request, status=""):
+        if request.method == 'GET':
+            if status == "":
+                volunteers = Volunteers.objects.all()
+                serializer = volunteerSerializer(volunteers, many=True)
+            else:
+                volunteers = Volunteers.objects.filter(status=status)
+                serializer = volunteerSerializer(volunteers, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+
+class patchPendingVolunteer(APIView):
+    permission_classes = (IsAuthenticated,)
 
     @csrf_exempt
     def patch(self, request, status=""):
@@ -215,16 +229,6 @@ class pendingVolunteer(APIView):
                 )
 
                 return HttpResponse(status=200)
-    @csrf_exempt
-    def get(self, request, status=""):
-        if request.method == 'GET':
-            if status == "":
-                volunteers = Volunteers.objects.all()
-                serializer = volunteerSerializer(volunteers, many=True)
-            else:
-                volunteers = Volunteers.objects.filter(status=status)
-                serializer = volunteerSerializer(volunteers, many=True)
-        return JsonResponse(serializer.data, safe=False)
 
 
 class userType(APIView):

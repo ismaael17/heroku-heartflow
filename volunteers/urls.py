@@ -12,6 +12,7 @@ urlpatterns = [
     path('reset-password/<token>', views.resetPassword, name='reset-password/token'),
     re_path(r'^get-pending-volunteers', views.pendingVolunteer.as_view(), name='pending-volunteers'),
     path('pending-volunteers/<status>', views.pendingVolunteer.as_view(), name = 'pending-volunteers'),
+    path('patch-pending-volunteers/<status>/', views.patchPendingVolunteer.as_view(), name = 'patch-pending-volunteers'),
     path('user-type', views.userType.as_view(), name='user-type'),
     path('reset_password',
          auth_views.PasswordResetView.as_view(template_name='./registration/password_reset_form.html'),

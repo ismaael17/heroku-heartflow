@@ -59,7 +59,7 @@ export default class VolunteerDelivery extends Component {
 					console.log(response)
 					if (response.status === 200) {
 						// toast.success("Succesfully logged the delivery at " + this.state.outlet)
-						alert("Successfully logged the delivery at " + this.state.outlet)
+						alert("Successfully logged the delivery at " + this.state.outlet.split(" ", 2)[1])
 					} else if (response.status === 201) {
 						// toast.warn("This delivery has been flagged for duplicate values")
 						alert("his delivery has been flagged for duplicate values, but has been logged")
@@ -144,7 +144,7 @@ export default class VolunteerDelivery extends Component {
 						<span className='NUMBEROFCOUPONS'>NUMBER OF COUPONS</span>
 						<span className='COUPONSDELIVERY'>COUPONS DELIVERY</span>
 
-						<form id="deliveryForm" action="https://heartflow-support-system.herokuapp.com/volunteerhomepage">
+						<form id="deliveryForm" action="http://localhost:3000/volunteerhomepage">
 							<input type='number' className='edtNrCoupon' onChange={this.onChangeCouponAmount} required={true} min={1} defaultValue={1}/>
 							<input type='text' className='edtSerial' value={this.state.serialLetter} onChange={this.onChangeSerial} maxLength={1} required={true}/>
 							<select className='edtOutlet' onChange={this.onChangeOutlet} required={true}>

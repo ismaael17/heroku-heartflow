@@ -664,7 +664,8 @@ class deliver(APIView):
                     message='Amount of coupons delivered: ' + str(int (deliver_data['range_to']) - int(deliver_data['range_from']) + 1) + '\n' + 'Serial Letter: ' + deliver_data['serial_letter'] + '\n' + 'Delivery Company: ' + delivery_company.companyName + '\n' + 'Please transfer ZAR: ' + str(int(deliver_data['amount']) * 10) + ' to the following account: ' + '\n' + 'Account Number: 123456789' + '\n' + 'Account Name: Coupon Delivery' + '\n' + 'Bank: Standard Bank' + '\n' + 'Branch Code: 123456' + '\n'
 
                 else :
-                    message = 'Amount of coupons delivered: ' + str(int (deliver_data['range_to']) - int(deliver_data['range_from']) + 1) + '\n' + 'Serial Letter: ' + deliver_data['serial_letter'] + '\n' + 'Delivery Company: ' + delivery_company.companyName + '\n' + 'Paid ZAR: ' + str(int(deliver_data['amount']) * 10) 
+                    message = 'Amount of coupons delivered: ' + str(int (deliver_data['range_to']) - int(deliver_data['range_from']) + 1) + '\n' + 'Serial Letter: ' + deliver_data['serial_letter'] + '\n' + 'Delivery Company: ' + delivery_company.companyName + '\n' + 'Paid ZAR: ' + str(int(deliver_data['amount']) * 10)
+                    deliver_data['paid'] = True
                 #send receipt to company
                 send_mail(
                     subject='Delivery Receipt',

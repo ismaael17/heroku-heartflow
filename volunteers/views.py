@@ -139,7 +139,7 @@ class patchPendingVolunteer(APIView):
 
                 volunteer.status = "approve"
                 token = encoded_reset_token(volunteer.id)
-                link = 'http://' + 'localhost:3000' + '/setpassword/' + "?token=" + token + "&email=" + volunteer.email
+                link = 'http://' + 'heartflow-support-system.herokuapp.com/' + '/setpassword' + "?token=" + token + "&email=" + volunteer.email
                 html_context = {'url': link}
                 msg = EmailMultiRelated('Volunteer Request Approved!', 'Plain text version', 'Heartflow',
                                         [volunteer.email])

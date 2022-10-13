@@ -22,14 +22,26 @@ import SetPasswordPage from '../Components/SetPasswordPage'
 import ForgotPassword from '../Components/ForgotPassword';
 import PasswordSupply from '../Components/PasswordSupply';
 import ForgotPswEmail from '../Components/ForgetPswMessage';
+import VolunteerHomePage_Deliveries from "../Components/VolunteerHomePage_Deliveries";
+import VolunteerHomePage_outlets from "../Components/VolunteerHomePage_outlets";
+import OutletEdit from "../Components/OutletEdit";
+import DirectorHomePage_Deliveries from "../Components/DirectorHomePage_Deliveries";
+import DirectorHomePage_Outlets from "../Components/DirectorHomePage_Outlets";
+import DirectorHomePage_Coupons from "../Components/DirectorHomePage_Coupons";
 
 const RouterDOM = () => {
 	return (
 		<Router>
 			<Switch>
 				<Route exact path="/directorhomepage"><DirectorHomePage /></Route>
+				<Route exact path="/directorhomepage_deliveries"><DirectorHomePage_Deliveries /></Route>
+				<Route exact path="/directorhomepage_outlets"><DirectorHomePage_Outlets /></Route>
+				<Route exact path="/directorhomepage_coupons"><DirectorHomePage_Coupons /></Route>
 				<Route exact path="/volunteersignup"><VolunteerSignUp /></Route>
 				<Route exact path="/volunteerhomepage"><VolunteerHomePage /></Route>
+				<Route exact path="/volunteerhomepage_deliveries"><VolunteerHomePage_Deliveries /></Route>
+				<Route exact path="/volunteerhomepage_outlets"><VolunteerHomePage_outlets /></Route>
+				<Route exact path="/outletedit"><OutletEdit /></Route>
 				<Route exact path="/"><HomePage /></Route>
 				<Route exact path="/loginpage"><LoginPage /></Route>
 				<Route exact path="/forgotpassword"><ForgotPassword /></Route>

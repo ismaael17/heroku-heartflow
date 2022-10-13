@@ -49,7 +49,6 @@ def volunteersCRUD(request):
             return HttpResponse(status=409)
         else:
             volunteer_data['password'] = make_password("password")
-            serializer = volunteerSerializer(data=volunteer_data)
             print(volunteer_data['branch'])
             try:
                 thisbranch = branch.objects.get(name=volunteer_data['branch'])
@@ -58,6 +57,7 @@ def volunteersCRUD(request):
 
             branchString = volunteer_data['branch']
             volunteer_data['branch'] = thisbranch.id
+            serializer = volunteerSerializer(data=volunteer_data)
             if serializer.is_valid():
                 volunteer = serializer.save()
                 token = Token.objects.get(user=volunteer).key
@@ -283,7 +283,6 @@ class registerCompany(APIView):
         if request.method == 'POST':
             company_data = JSONParser().parse(request)
             company_data['volunteer'] = request.user.id
-            company_data['branch'] = request.user.branch.id
             if Companies.objects.filter(companyName=company_data['companyName']).exists():
                 return HttpResponse(status=400)
             serializer = companySerializer(data=company_data)

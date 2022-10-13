@@ -175,7 +175,7 @@ export default function DirectorHomePage() {
                             columns={columns}
                             pageSize={5}
                             rowsPerPageOptions={[5]}
-                            getRowId={(row) => row.id}
+                            getRowId={(row) => row.email}
                             
                             onSelectionModelChange={async (newSelection) => {
                                 setSelection(newSelection.selectionModel)
